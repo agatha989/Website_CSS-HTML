@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ateliê da Manu | Mimos & Lembranças</title>
   <!-- Link para o nosso CSS que vamos criar já já -->
+  <link rel="icon" type="image/png" href="imag_web/Logo_Manu.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -130,7 +131,7 @@
     <div class="card-produto">
       <img src="imagens/abridordelata.png" alt="Chaveiro Abridor de Lata" class="img-produto">
       <h3>Chaveiro abridor de garrafa (32mm)</h3>
-      <p class="preço">R$ 12,00</p>
+      <p class="preco">R$ 12,00</p>
       <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Chaveiro%20Espelho!" target="_blank" class="btn-comprar">
         encomendar 📲
       </a>
@@ -140,12 +141,43 @@
     <div class="card-produto">
       <img src="imagens/ima_quadrado.png" alt="Kit 2 imã quadrado" class="img-produto">
       <h3>Kit 2 imã quadrado 5X5 </h3>
-      <p class="preço">R$ 24,00</p>
+      <p class="preco">R$ 24,00</p>
       <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Chaveiro%20Espelho!" target="_blank" class="btn-comprar">
         encomendar 📲
       </a>
     </div>
 
+  </div>
+</section>
+
+<!-- SEÇÃO DE AVALIAÇÕES INTERATIVA -->
+<section class="avaliacoes">
+  <h2>Deixe seu Carinho 💕</h2>
+  
+  <!-- FORMULÁRIO PARA O CLIENTE ESCREVER A AVALIAÇÃO -->
+  <div class="form-avaliacao">
+    <h3>Sua opinião é muito importante! ✨</h3>
+    
+    <input type="text" id="nomeCliente" placeholder="Seu nome" required>
+    
+    <select id="notaCliente">
+      <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+      <option value="4">⭐⭐⭐⭐ (4/5)</option>
+      <option value="3">⭐⭐⭐ (3/5)</option>
+      <option value="2">⭐⭐ (2/5)</option>
+      <option value="1">⭐ (1/5)</option>
+    </select>
+
+    <textarea id="textoCliente" rows="3" placeholder="Escreva aqui o que achou dos seus mimos..." required></textarea>
+
+    <button onclick="salvarAvaliacao()" class="btn-enviar-avaliacao">Enviar Avaliação 💌</button>
+  </div>
+
+  <h2>O que nossas clientes dizem 🌸</h2>
+
+  <!-- LISTA ONDE AS AVALIAÇÕES ENVIADAS VÃO APARECER -->
+  <div class="grid-avaliacoes" id="containerAvaliacoes">
+    <!-- As avaliações salvas serão inseridas aqui pelo JavaScript! -->
   </div>
 </section>
 
