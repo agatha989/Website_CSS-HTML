@@ -12,7 +12,7 @@
 body {
   font-family: 'Fredoka', sans-serif;
   background-color: #fce7f3;
-  background-image: url('imag_web/Background_pink.png');
+  background-image: url('imag_web/cream.png');
   background-repeat: repeat;
   background-size: 250px;
   color: #4a3e3e;
@@ -30,33 +30,33 @@ body {
 .logo-hero {
   width: 140px;
   height: auto;
-  margin-top: 20px;
-  margin-bottom: -10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
   filter: drop-shadow(0px 6px 19px rgba(219, 39, 119, 0.2));
   z-index: 3;
 }
 
 .banner-bem-vindo {
-  max-width: 700px;
+  max-width: 650px;
   width: 100%;
   height: auto;
-  margin-bottom: -20px;
+  margin-bottom: 20px;
   filter: drop-shadow(0px 8px 20px rgba(219, 39, 119, 0.15));
   z-index: 2;
 }
 
 .card-boas-vindas {
-  background: #ffdbedf2;
+  background: #c8785bd8;
   padding: 25px;
   border-radius: 25px;
-  max-width: 480px;
+  max-width: 450px;
   box-shadow: 0 10px 25px rgba(190, 24, 93, 0.1);
   z-index: 1;
 }
 
 .card-boas-vindas .subtitulo {
   font-family: 'Fredoka', sans-serif;
-  color: #582f3e;
+  color: #661511;
   font-size: 1rem;
   line-height: 1.4;
 }
@@ -114,8 +114,8 @@ h1, h2 {
   justify-content: center;
   width: 46px;
   height: 46px;
-  background-color: #ffdbedf2;
-  color: #be185d;
+  background-color: #edafb8;
+  color: #a13645;
   border-radius: 50%;
   font-size: 1.4rem;
   text-decoration: none;
@@ -124,10 +124,10 @@ h1, h2 {
 }
 
 .redes-sociais a:hover {
-  background-color: #ec4899;
-  color: rgb(255, 238, 246);
+  background-color: #6a0f21;
+  color: #f4f4c2;
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 18px rgba(236, 72, 153, 0.35);
+  box-shadow: 0 8px 18px #ec489959;
 }
 
 /* ESTILIZAÇÃO DA VITRINE DE PRODUTOS */
@@ -152,7 +152,7 @@ h1, h2 {
   font-size: 2.2rem;
   margin-bottom: 30px;
   display: inline-block;
-  background: #ffdbedf2;
+  background: #f4f4c2;
   padding: 8px 28px;
   border-radius: 25px;
   box-shadow: 0 4px 12px rgba(190, 24, 93, 0.1);
@@ -168,7 +168,7 @@ h1, h2 {
 }
 
 .card-produto {
-  background: rgba(255, 219, 237, 0.95);
+  background: #ffecdc;
   padding: 16px;
   border-radius: 20px;
   width: 230px; /* Largura ideal para caber 4 produtos por linha no PC */
@@ -194,7 +194,7 @@ h1, h2 {
 
 .card-produto h3 {
   font-family: 'Pacifico', cursive;
-  color: #9d174d;
+  color: #811340;
   font-size: 1.1rem;
   font-weight: normal;
   margin-bottom: 6px;
@@ -202,7 +202,7 @@ h1, h2 {
 
 .card-produto .preco {
   font-family: 'Fredoka', sans-serif;
-  color: #db2777;
+  color: #d85490;
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 12px;
@@ -211,19 +211,19 @@ h1, h2 {
 .btn-comprar {
   font-family: 'Fredoka', sans-serif;
   display: inline-block;
-  background-color: #ec4899;
+  background-color: #f38798;
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 600;
-  box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+  box-shadow: 0 8px 20px #ff7b9e44;
   transition: background-color 0.2s ease;
 }
 
 .btn-comprar:hover {
-  background-color: #db2777;
+  background-color: #75041b;
 }
 
 
@@ -238,7 +238,7 @@ h1, h2 {
 
 .card-diferencial {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: rgba(255, 219, 237, 0.85);
+  background: #f8c5cdd7;
   padding: 18px 20px;
   border-radius: 20px;
   width: 220px;
@@ -289,22 +289,22 @@ h1, h2 {
   font-weight: normal;
   margin-bottom: 25px;
   display: inline-block;
-  background: rgba(255, 219, 237, 0.95); /* O mesmo fundo rosa fofo das caixas */
+  background: #ffdbedf2; /* O mesmo fundo rosa fofo das caixas */
   padding: 10px 30px;
   border-radius: 25px;
   box-shadow: 0 4px 12px rgba(190, 24, 93, 0.1);
-  border: 1px solid #fbcfe8;
+  border: 1px solid #edafb8;
 }
 
 /* FORMULÁRIO DE AVALIAÇÃO */
 .form-avaliacao {
-  background: rgba(255, 229, 229, 0.95);
+  background: #ffddec;
   padding: 25px;
   border-radius: 20px;
   max-width: 500px;
   margin: 0 auto 40px auto;
   box-shadow: 0 8px 20px rgba(190, 24, 93, 0.1);
-  border: 2px solid #fbcfe8;
+  border: 2px solid #edafb8;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -312,7 +312,7 @@ h1, h2 {
 
 .form-avaliacao h3 {
   font-family: 'Fredoka', sans-serif;
-  color: #9d174d;
+  color: #811340;
   font-size: 1.1rem;
   margin-bottom: 8px;
 }
@@ -337,7 +337,7 @@ h1, h2 {
 }
 
 .btn-enviar-avaliacao {
-  background-color: #ec4899;
+  background-color: #f38798;
   color: rgb(255, 239, 239);
   border: none;
   padding: 12px;
@@ -350,6 +350,6 @@ h1, h2 {
 }
 
 .btn-enviar-avaliacao:hover {
-  background-color: #db2777;
+  background-color: #75041b;
   transform: translateY(-2px);
 }
