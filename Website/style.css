@@ -1,5 +1,197 @@
 /* 1. IMPORTANDO AS FONTES PACIFICO E FREDOKA DO GOOGLE FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Pacifico&display=swap');
+/* ==========================================
+BARRA DE AVISOS MARROM & CREME (ANIMADA)
+========================================== */
+.barra-anuncio {
+  background-color: #6b3724; /* Marrom aconchegante */
+  color: #f7ebe1;            /* Creme suave para leitura perfeita */
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.trilho-anuncio {
+  display: inline-block;
+  white-space: nowrap;
+  animation: deslizarEsquerda 25s linear infinite; /* 25s garante um movimento bem leve e lento */
+}
+
+.trilho-anuncio span {
+  display: inline-block;
+  padding-right: 15px; /* Espaço suave entre as frases */
+}
+
+/* ESPAÇAMENTO E ALINHAMENTO DO PONTO SEPARADOR */
+.trilho-anuncio .separador {
+  display: inline-block;
+  margin: 0 25px;         /* Cria o espaçamento largo igual ao do site de inspiração */
+  font-size: 0.9rem;      /* Tamanho ideal da bolinha */
+  vertical-align: middle; /* Centraliza a altura da bolinha com o texto */
+  color: #f7ebe1;         /* Cor creme do ponto */
+  opacity: 0.8;           /* Deixa o ponto um pouco mais suave e chique */
+}
+
+/* Animação CSS para deslizar continuamente para a esquerda */
+@keyframes deslizarEsquerda {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Move até a metade (onde a frase repetida assume suavemente) */
+  }
+}
+
+/* ==========================================
+FAIXA PRINCIPAL DO TOPO (MARROM)
+========================================== */
+.header-principal {
+  background-color: #6b3724; /* Marrom aconchegante */
+  padding: 12px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.container-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* 1. LOGO BONECA */
+.logo-boneca {
+  height: 85px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+}
+
+.logo-boneca:hover {
+  transform: scale(1.05);
+}
+
+/* 2. BARRA DE BUSCA */
+.box-busca {
+  flex: 1;
+  max-width: 480px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.box-busca input {
+  width: 100%;
+  padding: 10px 45px 10px 18px;
+  border-radius: 25px;
+  border: 1px solid #fee0e6;
+  background-color: #fffcf9; /* Creme bem suave */
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.9rem;
+  color: #4a3e3e;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.box-busca input::placeholder {
+  color: #a88e85;
+}
+
+.btn-busca {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #6b3724;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-busca:hover {
+  color: #a25238;
+}
+
+/* 3. MINHA CONTA E CARRINHO */
+.acoes-usuario {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.item-acao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #fee0e6; /* Creme/rosa claro */
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.item-acao:hover {
+  color: #ffffff;
+}
+
+.item-acao i {
+  font-size: 1.3rem;
+}
+
+.carrinho {
+  position: relative;
+}
+
+.badge-carrinho {
+  background-color: #f38798; /* Destaque rosa fofo */
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 50%;
+  margin-left: -4px;
+}
+
+
+/* ==========================================
+FAIXA INFERIOR DE CATEGORIAS (CREME)
+========================================== */
+.faixa-categorias {
+  background-color: #fee0e6; /* Creme rosado bem claro */
+  border-bottom: 2px solid #f8c5cd;
+  padding: 10px 20px;
+}
+
+.container-categorias {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.container-categorias a {
+  text-decoration: none;
+  color: #6b3724; /* Texto em marrom para contraste perfeito */
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.container-categorias a:hover {
+  color: #75041b;
+  transform: translateY(-1px);
+}
 
 /* RESET BÁSICO */
 * {
@@ -37,7 +229,7 @@ body {
 }
 
 .banner-bem-vindo {
-  max-width: 650px;
+  max-width: 750px;
   width: 100%;
   height: auto;
   margin-bottom: 20px;
@@ -46,7 +238,7 @@ body {
 }
 
 .card-boas-vindas {
-  background: #c8785bd8;
+  background: #a85e43ea;
   padding: 25px;
   border-radius: 25px;
   max-width: 450px;
@@ -56,7 +248,7 @@ body {
 
 .card-boas-vindas .subtitulo {
   font-family: 'Fredoka', sans-serif;
-  color: #661511;
+  color: #ffeae9;
   font-size: 1rem;
   line-height: 1.4;
 }
@@ -103,21 +295,21 @@ h1, h2 {
 .redes-sociais {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-top: 25px;
-  margin-bottom: 20px;
+  gap: 28px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .redes-sociais a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: 53px;
+  height: 53px;
   background-color: #edafb8;
   color: #a13645;
   border-radius: 50%;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   text-decoration: none;
   box-shadow: 0 4px 10px rgba(219, 39, 119, 0.15);
   transition: all 0.3s ease;
@@ -126,7 +318,7 @@ h1, h2 {
 .redes-sociais a:hover {
   background-color: #6a0f21;
   color: #f4f4c2;
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-4px) scale(1.08);
   box-shadow: 0 8px 18px #ec489959;
 }
 
@@ -194,8 +386,8 @@ h1, h2 {
 
 .card-produto h3 {
   font-family: 'Pacifico', cursive;
-  color: #811340;
-  font-size: 1.1rem;
+  color: #b41b46;
+  font-size: 1.4rem;
   font-weight: normal;
   margin-bottom: 6px;
 }
@@ -208,22 +400,26 @@ h1, h2 {
   margin-bottom: 12px;
 }
 
+/* BOTÃO DE ENCOMENDAR LINDO (RESTAURADO) */
 .btn-comprar {
   font-family: 'Fredoka', sans-serif;
   display: inline-block;
   background-color: #f38798;
   color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 10px 18px;
+  border-radius: 22px;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  box-shadow: 0 8px 20px #ff7b9e44;
-  transition: background-color 0.2s ease;
+  box-shadow: 0 4px 10px rgba(243, 135, 152, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
 }
 
 .btn-comprar:hover {
   background-color: #75041b;
+  transform: translateY(-2px);
 }
 
 
@@ -261,7 +457,7 @@ h1, h2 {
 
 .card-diferencial h3 {
   font-family: 'Pacifico', cursive;
-  color: #9d174d;
+  color: #811340;
   font-size: 1.1rem;
   font-weight: normal;
   margin-bottom: 6px;
@@ -298,13 +494,13 @@ h1, h2 {
 
 /* FORMULÁRIO DE AVALIAÇÃO */
 .form-avaliacao {
-  background: #ffddec;
+  background: #a25238df;
   padding: 25px;
   border-radius: 20px;
   max-width: 500px;
   margin: 0 auto 40px auto;
   box-shadow: 0 8px 20px rgba(190, 24, 93, 0.1);
-  border: 2px solid #edafb8;
+  border: 2px solid #6b3724;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -312,7 +508,7 @@ h1, h2 {
 
 .form-avaliacao h3 {
   font-family: 'Fredoka', sans-serif;
-  color: #811340;
+  color: #fce7f3;
   font-size: 1.1rem;
   margin-bottom: 8px;
 }
@@ -327,8 +523,8 @@ h1, h2 {
   font-family: 'Fredoka', sans-serif;
   font-size: 0.9rem;
   outline: none;
-  background-color: #fff2f5;
-  color: #582f3e;
+  background-color: #fee0e6;
+  color: #4a3e3e;
 }
 
 .form-avaliacao input:focus,
@@ -352,4 +548,346 @@ h1, h2 {
 .btn-enviar-avaliacao:hover {
   background-color: #75041b;
   transform: translateY(-2px);
+}
+
+/* SEÇÃO EMBALAGEM DE CAPRICHO */
+.secao-embalagem {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-embalagem {
+  background: rgba(255, 219, 237, 0.95);
+  border-radius: 25px;
+  padding: 20px;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #fbcfe8;
+  box-shadow: 0 10px 25px rgba(190, 24, 93, 0.1);
+  flex-wrap: wrap; /* Para se ajustar no celular */
+}
+
+.img-embalagem {
+  max-width: 320px;
+  width: 100%;
+  border-radius: 18px;
+}
+
+.texto-embalagem {
+  flex: 1;
+  min-width: 250px;
+  text-align: left;
+}
+
+.texto-embalagem h2 {
+  font-family: 'Pacifico', cursive;
+  color: #9d174d;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.texto-embalagem p {
+  font-family: 'Fredoka', sans-serif;
+  color: #582f3e;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* GAVETA LATERAL DE CARRINHO */
+.gaveta-carrinho {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 350px;
+  height: 100vh;
+  background: #fffcf9;
+  border-left: 1px solid #f8c5cd;
+  box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+  /* ARREDONDA OS CANTOS DA ESQUERDA (TOPO E BASE) */
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  /* Garante que o conteúdo interno respeite as curvas */
+  overflow: hidden;
+}
+
+.gaveta-carrinho.aberto {
+  right: 0;
+}
+
+#overlayCarrinho {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: none;
+}
+
+#overlayCarrinho.aberto {
+  display: block;
+}
+
+.header-gaveta {
+  padding: 20px;
+  background: #6c3521;
+  color: #fee0e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.corpo-gaveta {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.item-gaveta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #fee0e6;
+}
+
+.btn-remover {
+  background: none;
+  border: none;
+  color: #d9534f;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.footer-gaveta {
+  padding: 20px;
+  background: #fee0e6;
+  border-top: 1px solid #f8c5cd;
+}
+
+.total-linha {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #6b3724;
+}
+
+.btn-finalizar-wa {
+  width: 100%;
+  background-color: #f38798;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-finalizar-wa:hover {
+  background-color: #75041b;
+  transform: translateY(-2px);
+}
+
+.btn-fechar-gaveta {
+  background: none;             /* Tira o fundo cinza/branco retangular */
+  border: none;                 /* Tira as bordas padrão do botão */
+  color: #fee0e6;               /* Cor do X (pode ser a mesma cor do texto do topo) */
+  font-size: 1.6rem;            /* Tamanho da letra X */
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;           /* Faz o foco/clique ficar perfeitamente redondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+/* Efeito suave ao passar o mouse por cima do X */
+.btn-fechar-gaveta:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================
+ESTILOS DA PÁGINA DE CATEGORIAS (produtos.html)
+========================================== */
+
+.header-simples-cat {
+  background-color: #6b3724;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-voltar {
+  color: #fee0e6;
+  text-decoration: none;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.btn-voltar:hover {
+  color: #ffffff;
+}
+
+.logo-boneca-cat {
+  height: 50px;
+  width: auto;
+}
+
+.container-categoria-pagina {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.titulo-secao-cat {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.titulo-secao-cat h1 {
+  display: inline-block;
+  background: #ffdbedf2;
+  padding: 8px 30px;
+  border-radius: 25px;
+  border: 1px solid #edafb8;
+  font-size: 2.2rem;
+}
+
+/* ESTRUTURA LADO A LADO (SIDEBAR + GRID) */
+.layout-categoria {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* SIDEBAR DE FILTROS */
+.sidebar-filtros {
+  background: #ffecdc;
+  padding: 20px;
+  border-radius: 20px;
+  width: 260px;
+  border: 1px solid #fbcfe8;
+  box-shadow: 0 6px 15px rgba(190, 24, 93, 0.08);
+}
+
+.box-busca-sidebar {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.box-busca-sidebar input {
+  width: 100%;
+  padding: 8px 35px 8px 12px;
+  border-radius: 15px;
+  border: 1px solid #fee0e6;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.box-busca-sidebar button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b3724;
+  cursor: pointer;
+}
+
+.sidebar-filtros h3 {
+  font-family: 'Pacifico', cursive;
+  color: #9d174d;
+  font-size: 1.2rem;
+  margin: 15px 0 10px 0;
+  font-weight: normal;
+}
+
+.lista-cat-sidebar {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-cat-sidebar li {
+  margin-bottom: 8px;
+}
+
+.lista-cat-sidebar a {
+  text-decoration: none;
+  color: #582f3e;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.lista-cat-sidebar a:hover,
+.lista-cat-sidebar a.ativo {
+  color: #ec4899;
+  font-weight: 600;
+}
+
+.filtros-preco {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filtros-preco input {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #fee0e6;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+}
+
+.btn-filtrar-sidebar {
+  background-color: #f38798;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 12px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.btn-filtrar-sidebar:hover {
+  background-color: #75041b;
+}
+
+/* GRADE DE PRODUTOS ALINHADA À DIREITA */
+.grid-categoria-produtos {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+  .layout-categoria {
+    flex-direction: column;
+  }
+  .sidebar-filtros {
+    width: 100%;
+  }
 }

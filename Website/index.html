@@ -12,13 +12,67 @@
 </head>
 <body>
 
+<!-- BARRA DE AVISOS EM MOVIMENTO INFINITO -->
+  <div class="barra-anuncio">
+    <div class="trilho-anuncio">
+      <span>Entregas para todo o Brasil 📦</span>  <span class="separador">&bull;</span>
+      <span>Peças 100% personalizadas com amor 💝</span>  <span class="separador">&bull;</span>
+      <span>Envio rápido & embalagem caprichada 🎀</span>  <span class="separador">&bull;</span>
+      <span>Dúvidas? Fale no WhatsApp 📲</span>  <span class="separador">&bull;</span>
+      <!-- Repetindo a lista para fazer o loop infinito sem buracos -->
+      <span>Entregas para todo o Brasil 📦</span>  <span class="separador">&bull;</span>
+      <span>Peças 100% personalizadas com amor 💝</span>  <span class="separador">&bull;</span>
+      <span>Envio rápido & embalagem caprichada 🎀</span>  <span class="separador">&bull;</span>
+      <span>Dúvidas? Fale no WhatsApp 📲</span>  <span class="separador">&bull;</span>
+    </div>
+  </div>
+
+<!-- FAIXA PRINCIPAL DO TOPO (MARROM INTERMEDIÁRIO) -->
+<div class="header-principal">
+  <div class="container-header">
+    
+    <!-- 1. Logo com a Bonequinha Manu -->
+    <a href="#" class="logo-area">
+      <img src="imag_web/Manu_boneca.png" alt="Ateliê da Manu" class="logo-boneca">
+    </a>
+
+    <!-- BARRA DE BUSCA (REDIRECIONA PARA PRODUTOS.HTML) -->
+<div class="box-busca">
+  <input type="text" id="inputBuscaHome" placeholder="Buscar produto..." onkeypress="if(event.key === 'Enter') irParaBusca()">
+  <button class="btn-busca" onclick="irParaBusca()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</div>
+
+    <!-- 3. Carrinho -->
+
+      <div class="item-acao carrinho">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge-carrinho">0</span>
+      </div>
+
+  </div>
+</div>
+
+<!-- FAIXA DE CATEGORIAS NO HEADER -->
+<nav class="faixa-categorias">
+  <div class="container-categorias">
+    <a href="produtos.html?cat=todos">TODOS</a>
+    <a href="produtos.html?cat=imas">ÍMÃS PERSONALIZADOS</a>
+    <a href="produtos.html?cat=chaveiros">CHAVEIROS</a>
+    <a href="produtos.html?cat=natal">ESPECIAL NATAL</a>
+    <a href="produtos.html?cat=bottons">BOTTONS</a>
+    <a href="index.html#avaliacoes">AVALIAÇÕES</a>
+  </div>
+</nav>
+
 <header class="hero">
-  <!-- A Logo Redondinha no Topo -->
-  <img src="imag_web/Logo_AteliedaManu.png" alt="Logo Ateliê da Manu" class="logo-hero">
 
-  <!-- A Imagem do Bem-Vindo Aquarela que você fez no Canva! -->
+  <!-- A BONEQUINHA FLUTUANDO NO TOPO -->
+  <div class="banner">
+    <!-- A Imagem do Bem-Vindo Aquarela que você fez no Canva! -->
   <img src="imag_web/Seja_Bem_Vindo!.png" alt="Seja Bem-Vindo ao Ateliê da Manu" class="banner-bem-vindo">
-
+  </div>
   <!-- O Card com o Subtítulo + Botão de Ação -->
   <div class="card-boas-vindas">
     <p class="subtitulo">
@@ -64,89 +118,117 @@
 <!-- SEÇÃO DE PRODUTOS REAL DO ATELIÊ -->
 
     <!-- Produto 1 -->
-  <section class="produtos">
+  <section class="produtos" id="produtos">
     <h2>Nossos Queridinhos 💕</h2>
 
   <div class="grid-produtos">
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="imas" data-nome="Calendário magnético">
       <img src="imagens/calendario.png" alt="Calendário magnético" class="img-produto">
       <h3>Calendário magnético</h3>
       <p class="preco">R$ 29,90</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Calendário%20magnético!" target="_blank" class="btn-comprar">
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Calendário magnético', 29.90)">
         Encomendar 📲
       </a>
     </div>
 
     <!-- Produto 2 -->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="imas" data-nome="Kit ímã redondo">
       <img src="imagens/ima_redondo.png" alt="Kit ímã redondo" class="img-produto">
       <h3>Kit Ímã Redondo (44mm, 4 un)</h3>
       <p class="preco">R$ 24,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Kit%20Ímã%20Redondo!" target="_blank" class="btn-comprar">
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit Ímã Redondo', 24.00)">
         Encomendar 📲
       </a>
     </div>
 
     <!-- Produto 3 -->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="natal" data-nome="Enfeite de Natal">
       <img src="imagens/EnfeitedeNatal.png" alt="Enfeites de Natal" class="img-produto">
       <h3>Enfeite de Natal</h3>
       <p class="preco">A partir de R$ 12,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Enfeite%20de%20Natal!" target="_blank" class="btn-comprar">
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Enfeite de Natal', 12.00)">
         Encomendar 📲
       </a>
     </div>
 
     <!-- Produto 4 -->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="chaveiros" data-nome="Chaveiro Abridor de Garrafa">
       <img src="imagens/AbridordeGarrafa.png" alt="Chaveiro Abridor de Garrafa" class="img-produto">
       <h3>Chaveiro Abridor Garrafa (44mm)</h3>
       <p class="preco">R$ 13,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Chaveiro%20Abridor!" target="_blank" class="btn-comprar">
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Chaveiro Abridor de Garrafa', 13.00)">
         Encomendar 📲
       </a>
     </div>
 
     <!-- Produto 5 -->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="bottons" data-nome="Kit 5 Bottons">
       <img src="imagens/5_bottons.png" alt="Kit 5 bottons" class="img-produto">
       <h3>Kit 5 Bottons (44mm)</h3>
       <p class="preco">R$ 20,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Kit%205%20Bottons!" target="_blank" class="btn-comprar">
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit 5 Bottons', 20.00)">
         Encomendar 📲
       </a>
     </div>
 
     <!-- Produto 6 -->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="chaveiros" data-nome="Chaveiro Espelho">
       <img src="imagens/chaveiro_espelho.png" alt="Chaveiro Espelho" class="img-produto">
       <h3>Chaveiro Espelho (58mm)</h3>
       <p class="preco">R$ 15,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Chaveiro%20Espelho!" target="_blank" class="btn-comprar">
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Chaveiro Espelho', 15.00)">
         Encomendar 📲
       </a>
     </div>
 
 <!-- Produto 7 -->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="chaveiros" data-nome="Chaveiro Abridor de Lata">
       <img src="imagens/abridordelata.png" alt="Chaveiro Abridor de Lata" class="img-produto">
       <h3>Chaveiro abridor de garrafa (32mm)</h3>
       <p class="preco">R$ 12,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Chaveiro%20Espelho!" target="_blank" class="btn-comprar">
-        encomendar 📲
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Chaveiro Abridor de Lata', 12.00)">
+        Encomendar 📲
       </a>
     </div>
 
 <!-- Produto 8-->
-    <div class="card-produto">
+    <div class="card-produto" data-categoria="imas" data-nome="Kit 2 imã quadrado">
       <img src="imagens/ima_quadrado.png" alt="Kit 2 imã quadrado" class="img-produto">
       <h3>Kit 2 imã quadrado 5X5 </h3>
       <p class="preco">R$ 24,00</p>
-      <a href="https://wa.me/5521980033100?text=Olá,%20Manu!%20Quero%20encomendar%20o%20Chaveiro%20Espelho!" target="_blank" class="btn-comprar">
-        encomendar 📲
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit 2 imã quadrado', 24.00)">
+        Encomendar 📲
       </a>
     </div>
 
+<!-- Caixinha de Natal -->
+    <div class="card-produto" data-categoria="natal" data-nome="Caixinha de Natal">
+      <img src="imagens/WhatsApp Image 2026-10-31 at 17.42.11.jpeg" alt="Caixinha de Natal" class="img-produto">
+      <h3>Caixinha de Natal</h3>
+      <p class="preco">R$ 59,90</p>
+      <a class="btn-comprar" onclick="adicionarAoCarrinho('Caixinha de Natal', 59.90)">
+        Encomendar 📲
+      </a>
+</div>
+
+<!-- Kit de Ímãs Flexível (Tabela de preços) -->
+<div class="card-produto" data-categoria="imas" data-nome="Kit de Ímãs">
+  <img src="imagens/Kit_12imas.jpeg" alt="Kit de Ímãs" class="img-produto">
+  <h3>Kit de Ímãs (5x5 cm)</h3>
+  <p class="preco">A partir de R$ 18,00</p>
+  <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit de Ímãs', 18.00)">
+    Encomendar 📲
+  </a>
+</div>
+
+
+<!-- SEÇÃO DE CAPRICHO NAS EMBALAGENS -->
+<section class="secao-embalagem">
+  <div class="card-embalagem">
+    <img src="imag_web/Manu_boneca2.png" alt="Caprichamos na Embalagem" class="img-embalagem">
+    <div class="texto-embalagem">
+      <h2>Feito com muito amor e carinho! 📦💕</h2>
+    </div>
   </div>
 </section>
 
@@ -180,6 +262,31 @@
     <!-- As avaliações salvas serão inseridas aqui pelo JavaScript! -->
   </div>
 </section>
+
+<!-- GAVETA LATERAL DO CARRINHO DE COMPRAS -->
+<div id="painelCarrinho" class="gaveta-carrinho">
+  <div class="header-gaveta">
+    <h3>Seu Carrinho 🛒</h3>
+    <button onclick="fecharCarrinho()" class="btn-fechar-gaveta">&times;</button>
+  </div>
+
+  <!-- ITENS ADICIONADOS -->
+  <div id="itensCarrinhoGaveta" class="corpo-gaveta">
+    <!-- O JavaScript preenche os itens com foto, nome e preço aqui! -->
+  </div>
+
+  <div class="footer-gaveta">
+    <div class="total-linha">
+      <span>Total:</span>
+      <strong id="valorTotalCarrinho">R$ 0,00</strong>
+    </div>
+    <button onclick="enviarPedidoFinalWhatsApp()" class="btn-finalizar-wa">
+      Finalizar Pedido no WhatsApp 📲
+    </button>
+  </div>
+</div>
+
+<div id="overlayCarrinho" onclick="fecharCarrinho()"></div>
 
   <!-- Link para o nosso arquivo JavaScript -->
   <script src="script.js"></script>
