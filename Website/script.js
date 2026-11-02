@@ -170,9 +170,6 @@ function adicionarAoCarrinho(nome, preco) {
   carrinho.push({ nome, preco });
   localStorage.setItem("carrinhoAtelie", JSON.stringify(carrinho));
   atualizarContadorCarrinho();
-
-  // Alerta simples e amigável
-  alert(`"${nome}" foi adicionado ao seu carrinho! 🛍️✨`);
 }
 
 function atualizarContadorCarrinho() {
@@ -190,10 +187,6 @@ document.addEventListener("click", (e) => {
 });
 
 function finalizarPedidoWhatsApp() {
-  if (carrinho.length === 0) {
-    alert("Seu carrinho está vazio! Escolha alguns mimos na vitrine primeiro. 💕");
-    return;
-  }
 
   const telefone = "5521980033100";
   let mensagem = "Olá, Manu! Gostaria de fazer o pedido dos seguintes mimos:\n\n";
@@ -223,11 +216,6 @@ function salvarAvaliacao() {
   const nome = document.getElementById("nomeCliente").value.trim();
   const nota = document.getElementById("notaCliente").value;
   const texto = document.getElementById("textoCliente").value.trim();
-
-  if (nome === "" || texto === "") {
-    alert("Por favor, preencha seu nome e a mensagem antes de enviar! 💕");
-    return;
-  }
 
   const estrelas = "⭐".repeat(parseInt(nota));
 
