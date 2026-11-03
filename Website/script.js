@@ -1,29 +1,84 @@
 // ==========================================
 // ESTADO DO CARRINHO E INICIALIZAÇÃO
 // ==========================================
-let carrinho = JSON.parse(localStorage.getItem("carrinhoAtelie")) || [];
+let carrinho = (JSON.parse(localStorage.getItem("carrinhoAtelie")) || [])
+  .filter((item) => typeof item.preco === "number" && !isNaN(item.preco))
+  .map((item) => ({ ...item, qtd: item.qtd || 1 }));
 
 document.addEventListener("DOMContentLoaded", () => {
   atualizarContadorCarrinho();
+  carregarAvaliacoes();
+  configurarBusca();
+  configurarFiltros();
+  
+  // INICIALIZA O CARROSSEL SE EXISTIR NA PÁGINA
+  if (document.querySelectorAll(".slide").length > 0) {
+    reiniciarTemporizador();
+  }
 });
 
-function adicionarAoCarrinho(nome, preco) {
-  carrinho.push({ nome, preco });
+// ==========================================
+// CARRINHO DE COMPRAS & GAVETA LATERAL
+// ==========================================
+function salvarCarrinho() {
   localStorage.setItem("carrinhoAtelie", JSON.stringify(carrinho));
+}
+
+function formatarPreco(valor) {
+  return "R$ " + valor.toFixed(2).replace(".", ",");
+}
+
+function pegarImagemDoCard() {
+  const card = window.event?.target?.closest(".card-produto");
+  return card?.querySelector(".img-produto")?.getAttribute("src") || "";
+}
+
+function adicionarAoCarrinho(nome, preco, img) {
+  img = img || pegarImagemDoCard();
+  const existente = carrinho.find((item) => item.nome === nome);
+  if (existente) {
+    existente.qtd++;
+  } else {
+    carrinho.push({ nome, preco, qtd: 1, img });
+  }
+  salvarCarrinho();
   atualizarContadorCarrinho();
-  abrirCarrinho(); // Abre a gaveta para você VER o item adicionado!
+  abrirCarrinho();
+}
+
+function adicionarComOpcao(evento, nomeBase) {
+  // Encontra o card-produto onde ocorreu o clique no botão
+  const botao = evento.currentTarget || evento.target;
+  const card = botao.closest(".card-produto");
+
+  if (!card) return;
+
+  const select = card.querySelector(".select-opcao");
+  const opcaoSelecionada = select.options[select.selectedIndex];
+  
+  const preco = parseFloat(select.value);
+  const rotulo = opcaoSelecionada.dataset.rotulo || opcaoSelecionada.text;
+  const img = card.querySelector(".img-produto")?.getAttribute("src") || "";
+
+  // Adiciona ao carrinho formatado com o nome e a opção (ex: Kit de Ímãs (Kit 6))
+  adicionarAoCarrinho(`${nomeBase} (${rotulo})`, preco, img);
+}
+
+function atualizarPrecoCard(select) {
+  const card = select.closest(".card-produto");
+  card.querySelector(".preco").innerText = formatarPreco(parseFloat(select.value));
 }
 
 function atualizarContadorCarrinho() {
   const badge = document.querySelector(".badge-carrinho");
-  if (badge) badge.innerText = carrinho.length;
+  const totalPecas = carrinho.reduce((soma, item) => soma + item.qtd, 0);
+  if (badge) badge.innerText = totalPecas;
 }
 
 function abrirCarrinho() {
   const painel = document.getElementById("painelCarrinho");
   const overlay = document.getElementById("overlayCarrinho");
   if (!painel) return;
-
   renderizarItensCarrinho();
   painel.classList.add("aberto");
   overlay.classList.add("aberto");
@@ -39,34 +94,63 @@ function renderizarItensCarrinho() {
   const totalElemento = document.getElementById("valorTotalCarrinho");
   if (!container) return;
 
-  container.innerHTML = "";
-  let total = 0;
-
   if (carrinho.length === 0) {
     container.innerHTML = `<p class="carrinho-vazio">Seu carrinho está vazio 🛍️</p>`;
     totalElemento.innerText = "R$ 0,00";
     return;
   }
 
+  let html = "";
+  let total = 0;
+
   carrinho.forEach((item, index) => {
-    total += item.preco;
-    container.innerHTML += `
+    const subtotal = item.preco * item.qtd;
+    total += subtotal;
+    html += `
       <div class="item-gaveta">
-        <div>
+        ${item.img ? `<img src="${item.img}" alt="${item.nome}" class="img-item-gaveta">` : ""}
+        <div class="info-item-gaveta">
           <strong>${item.nome}</strong>
-          <p>R$ ${item.preco.toFixed(2).replace(".", ",")}</p>
+          <p class="preco-unit">${item.qtd}x ${formatarPreco(item.preco)}</p>
+          <div class="controle-qtd">
+            <button onclick="alterarQuantidade(${index}, -1)">−</button>
+            <span>${item.qtd}</span>
+            <button onclick="alterarQuantidade(${index}, 1)">+</button>
+          </div>
         </div>
-        <button onclick="removerItemCarrinho(${index})" class="btn-remover">&times;</button>
+        <div class="lado-direito-item">
+          <button onclick="removerItemCarrinho(${index})" class="btn-remover" title="Remover">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          <strong class="subtotal-item">${formatarPreco(subtotal)}</strong>
+        </div>
       </div>
     `;
   });
 
-  totalElemento.innerText = `R$ ${total.toFixed(2).replace(".", ",")}`;
+  container.innerHTML = html;
+  totalElemento.innerText = formatarPreco(total);
+}
+
+// ==========================================
+// ALTERAR QUANTIDADE SIMPLES NA GAVETA
+// ==========================================
+function alterarQuantidade(index, mudanca) {
+  carrinho[index].qtd += mudanca;
+
+  // Se a quantidade zerar, remove o item do carrinho
+  if (carrinho[index].qtd <= 0) {
+    carrinho.splice(index, 1);
+  }
+
+  salvarCarrinho();
+  atualizarContadorCarrinho();
+  renderizarItensCarrinho();
 }
 
 function removerItemCarrinho(index) {
   carrinho.splice(index, 1);
-  localStorage.setItem("carrinhoAtelie", JSON.stringify(carrinho));
+  salvarCarrinho();
   atualizarContadorCarrinho();
   renderizarItensCarrinho();
 }
@@ -78,32 +162,26 @@ function enviarPedidoFinalWhatsApp() {
   let mensagem = "Olá, Manu! Quero finalizar o pedido do meu carrinho:\n\n";
   let total = 0;
 
-  carrinho.forEach(item => {
-    mensagem += `• ${item.nome} - R$ ${item.preco.toFixed(2).replace(".", ",")}\n`;
-    total += item.preco;
+  carrinho.forEach((item) => {
+    const subtotal = item.preco * item.qtd;
+    mensagem += `• ${item.qtd}x ${item.nome} - ${formatarPreco(subtotal)}\n`;
+    total += subtotal;
   });
 
-  mensagem += `\n*Total: R$ ${total.toFixed(2).replace(".", ",")}*`;
+  mensagem += `\n*Total: ${formatarPreco(total)}*`;
   const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
   window.open(url, "_blank");
 }
 
-// Clicar no ícone de carrinho no topo abre o painel
+// CLIQUE NO ÍCONE DO CARRINHO NO TOPO
 document.addEventListener("click", (e) => {
   if (e.target.closest(".carrinho")) {
     abrirCarrinho();
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  atualizarContadorCarrinho();
-  carregarAvaliacoes();
-  configurarBusca();
-  configurarFiltros();
-});
-
 // ==========================================
-// 1. SISTEMA DE BUSCA DE PRODUTOS
+// SISTEMA DE BUSCA DE PRODUTOS
 // ==========================================
 function configurarBusca() {
   const inputBusca = document.querySelector(".box-busca input");
@@ -111,7 +189,6 @@ function configurarBusca() {
 
   if (!inputBusca) return;
 
-  // Busca enquanto o usuário digita
   inputBusca.addEventListener("input", (e) => {
     const termo = e.target.value.toLowerCase().trim();
     filtrarPorTexto(termo);
@@ -127,10 +204,9 @@ function configurarBusca() {
 
 function filtrarPorTexto(termo) {
   const produtos = document.querySelectorAll(".card-produto");
-
   produtos.forEach((produto) => {
     const nomeProduto = produto.getAttribute("data-nome") || "";
-    if (nomeProduto.includes(termo)) {
+    if (nomeProduto.toLowerCase().includes(termo)) {
       produto.style.display = "flex";
     } else {
       produto.style.display = "none";
@@ -139,7 +215,7 @@ function filtrarPorTexto(termo) {
 }
 
 // ==========================================
-// 2. FILTRO POR CATEGORIAS (ÍMÃS, CHAVEIROS, ETC)
+// FILTRO POR CATEGORIAS
 // ==========================================
 function configurarFiltros() {
   const linksCategorias = document.querySelectorAll(".link-cat");
@@ -148,11 +224,10 @@ function configurarFiltros() {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const categoriaSelecionada = link.getAttribute("data-categoria");
-
       const produtos = document.querySelectorAll(".card-produto");
+
       produtos.forEach((produto) => {
         const catProduto = produto.getAttribute("data-categoria");
-
         if (categoriaSelecionada === "todos" || catProduto === categoriaSelecionada) {
           produto.style.display = "flex";
         } else {
@@ -164,66 +239,17 @@ function configurarFiltros() {
 }
 
 // ==========================================
-// 3. FUNCIONALIDADE DO CARRINHO DE COMPRAS
-// ==========================================
-function adicionarAoCarrinho(nome, preco) {
-  carrinho.push({ nome, preco });
-  localStorage.setItem("carrinhoAtelie", JSON.stringify(carrinho));
-  atualizarContadorCarrinho();
-}
-
-function atualizarContadorCarrinho() {
-  const badge = document.querySelector(".badge-carrinho");
-  if (badge) {
-    badge.innerText = carrinho.length;
-  }
-}
-
-// Ao clicar no ícone do carrinho no topo, abre a finalização pelo WhatsApp!
-document.addEventListener("click", (e) => {
-  if (e.target.closest(".carrinho")) {
-    finalizarPedidoWhatsApp();
-  }
-});
-
-function finalizarPedidoWhatsApp() {
-
-  const telefone = "5521980033100";
-  let mensagem = "Olá, Manu! Gostaria de fazer o pedido dos seguintes mimos:\n\n";
-  let total = 0;
-
-  carrinho.forEach((item, index) => {
-    mensagem += `• ${item.nome} - R$ ${item.preco.toFixed(2).replace(".", ",")}\n`;
-    total += item.preco;
-  });
-
-  mensagem += `\n*Total estimado: R$ ${total.toFixed(2).replace(".", ",")}*`;
-  mensagem += "\n\nPodemos combinar a entrega e personalização?";
-
-  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
-
-  document.addEventListener("click", (e) => {
-  if (e.target.closest(".carrinho")) {
-    abrirCarrinho();
-  }
-});
-  }
-
-// ==========================================
-// 5. SISTEMA DE AVALIAÇÕES (LOCALSTORAGE)
+// SISTEMA DE AVALIAÇÕES
 // ==========================================
 function salvarAvaliacao() {
   const nome = document.getElementById("nomeCliente").value.trim();
   const nota = document.getElementById("notaCliente").value;
   const texto = document.getElementById("textoCliente").value.trim();
 
-  const estrelas = "⭐".repeat(parseInt(nota));
+  if (nome === "" || texto === "") return;
 
-  const novaAvaliacao = {
-    nome: nome,
-    estrelas: estrelas,
-    texto: texto
-  };
+  const estrelas = "⭐".repeat(parseInt(nota));
+  const novaAvaliacao = { nome, estrelas, texto };
 
   let listaAvaliacoes = JSON.parse(localStorage.getItem("avaliacoesAtelie")) || [];
   listaAvaliacoes.unshift(novaAvaliacao);
@@ -240,12 +266,12 @@ function carregarAvaliacoes() {
   if (!container) return;
 
   let listaAvaliacoes = JSON.parse(localStorage.getItem("avaliacoesAtelie")) || [];
-
   container.innerHTML = "";
 
-  listaAvaliacoes.forEach((item) => {
+  listaAvaliacoes.forEach((item, index) => {
     const cardHtml = `
       <div class="card-avaliacao">
+        <button class="btn-excluir-avaliacao" onclick="excluirAvaliacao(${index})" title="Excluir">🗑️</button>
         <div class="estrelas">${item.estrelas}</div>
         <p class="texto-avaliacao">"${item.texto}"</p>
         <span class="nome-cliente">— ${item.nome}</span>
@@ -255,7 +281,17 @@ function carregarAvaliacoes() {
   });
 }
 
-// REDIRECIONAR DA HOME PARA A PÁGINA DE PRODUTOS
+function excluirAvaliacao(index) {
+  let lista = JSON.parse(localStorage.getItem("avaliacoesAtelie")) || [];
+  lista.splice(index, 1);
+  localStorage.setItem("avaliacoesAtelie", JSON.stringify(lista));
+  carregarAvaliacoes();
+}
+
+
+// ==========================================
+// NAVEGAÇÃO & PARÂMETROS URL (PRODUTOS.HTML)
+// ==========================================
 function irParaBusca() {
   const input = document.getElementById("inputBuscaHome");
   if (!input) return;
@@ -265,7 +301,6 @@ function irParaBusca() {
   }
 }
 
-// LER PARÂMETROS DA URL E FILTRAR PRODUTOS NA PÁGINA PRODUTOS.HTML
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const categoria = urlParams.get("cat");
@@ -274,16 +309,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const titulo = document.getElementById("tituloCategoria");
   const produtos = document.querySelectorAll(".card-produto");
 
-  // SE VEIO UMA CATEGORIA PELA URL
   if (categoria) {
-    // Destaca o link ativo na sidebar
     document.querySelectorAll(".lista-cat-sidebar a").forEach(link => {
       if (link.getAttribute("data-cat") === categoria) {
         link.classList.add("ativo");
       }
     });
 
-    // Atualiza o título da página
     if (titulo) {
       const nomesCat = {
         todos: "Todos os Produtos ✨",
@@ -295,7 +327,6 @@ document.addEventListener("DOMContentLoaded", () => {
       titulo.innerText = nomesCat[categoria] || "Nossos Produtos ✨";
     }
 
-    // Filtra os cards
     produtos.forEach(prod => {
       const catProd = prod.getAttribute("data-categoria");
       if (categoria === "todos" || catProd === categoria) {
@@ -306,12 +337,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // SE VEIO UMA BUSCA PELA URL
   if (busca) {
     if (titulo) titulo.innerText = `Resultados para "${busca}" 🔍`;
     produtos.forEach(prod => {
       const nomeProd = prod.getAttribute("data-nome") || "";
-      if (nomeProd.includes(busca.toLowerCase())) {
+      if (nomeProd.toLowerCase().includes(busca.toLowerCase())) {
         prod.style.display = "flex";
       } else {
         prod.style.display = "none";
@@ -320,17 +350,58 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// FILTRO EM TEMPO REAL DENTRO DA PÁGINA PRODUTOS.HTML
 function filtrarNaPagina() {
   const termo = document.getElementById("buscaSidebar").value.toLowerCase().trim();
   const produtos = document.querySelectorAll(".card-produto");
 
   produtos.forEach(prod => {
     const nome = prod.getAttribute("data-nome") || "";
-    if (nome.includes(termo)) {
+    if (nome.toLowerCase().includes(termo)) {
       prod.style.display = "flex";
     } else {
       prod.style.display = "none";
     }
   });
+}
+
+// ==========================================
+// LÓGICA DO CARROSSEL DE BANNERS ROTATIVO
+// ==========================================
+let slideAtual = 0;
+let tempoTrocaAuto;
+
+function mostrarSlide(indice) {
+  const slides = document.querySelectorAll(".slide");
+  const bolinhas = document.querySelectorAll(".bolinha");
+
+  if (slides.length === 0) return;
+
+  if (indice >= slides.length) slideAtual = 0;
+  else if (indice < 0) slideAtual = slides.length - 1;
+  else slideAtual = indice;
+
+  slides.forEach((s) => s.classList.remove("item-ativo"));
+  bolinhas.forEach((b) => b.classList.remove("ativa"));
+
+  slides[slideAtual].classList.add("item-ativo");
+  if (bolinhas[slideAtual]) {
+    bolinhas[slideAtual].classList.add("ativa");
+  }
+
+  reiniciarTemporizador();
+}
+
+function mudarSlide(direcao) {
+  mostrarSlide(slideAtual + direcao);
+}
+
+function irParaSlide(indice) {
+  mostrarSlide(indice);
+}
+
+function reiniciarTemporizador() {
+  clearInterval(tempoTrocaAuto);
+  tempoTrocaAuto = setInterval(() => {
+    mudarSlide(1);
+  }, 5000);
 }

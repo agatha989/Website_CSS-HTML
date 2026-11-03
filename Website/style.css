@@ -76,6 +76,18 @@ FAIXA PRINCIPAL DO TOPO (MARROM)
   transform: scale(1.05);
 }
 
+.logo-atelie {
+  height: 85px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+}
+
+.logo-atelie:hover {
+  transform: scale(1.05);
+}
+
 /* 2. BARRA DE BUSCA */
 .box-busca {
   flex: 1;
@@ -117,35 +129,11 @@ FAIXA PRINCIPAL DO TOPO (MARROM)
   color: #a25238;
 }
 
-/* 3. MINHA CONTA E CARRINHO */
-.acoes-usuario {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.item-acao {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: #fee0e6; /* Creme/rosa claro */
-  font-family: 'Fredoka', sans-serif;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.item-acao:hover {
-  color: #ffffff;
-}
-
-.item-acao i {
-  font-size: 1.3rem;
-}
-
+/* 3. CARRINHO */
 .carrinho {
+  color: #f7ebe1;
   position: relative;
+  transform: scale(1.5);
 }
 
 .badge-carrinho {
@@ -550,50 +538,101 @@ h1, h2 {
   transform: translateY(-2px);
 }
 
-/* SEÇÃO EMBALAGEM DE CAPRICHO */
-.secao-embalagem {
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
+/* ==========================================
+CARROSSEL DE BANNERS (ESTILO GIFTS DA LU)
+========================================== */
+.secao-banner-carrossel {
+  max-width: 1100px;
+  margin: 25px auto;
+  padding: 0 15px;
 }
 
-.card-embalagem {
-  background: rgba(255, 219, 237, 0.95);
-  border-radius: 25px;
-  padding: 20px;
-  max-width: 800px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  border: 1px solid #fbcfe8;
-  box-shadow: 0 10px 25px rgba(190, 24, 93, 0.1);
-  flex-wrap: wrap; /* Para se ajustar no celular */
-}
-
-.img-embalagem {
-  max-width: 320px;
+.container-carrossel {
+  position: relative;
   width: 100%;
-  border-radius: 18px;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-.texto-embalagem {
-  flex: 1;
-  min-width: 250px;
-  text-align: left;
+.slides-carrossel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1; /* Mantém a proporção dos banners retangulares */
 }
 
-.texto-embalagem h2 {
-  font-family: 'Pacifico', cursive;
-  color: #9d174d;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
 }
 
-.texto-embalagem p {
-  font-family: 'Fredoka', sans-serif;
-  color: #582f3e;
-  font-size: 1rem;
-  line-height: 1.5;
+.slide.item-ativo {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ÁREAS CLICÁVEIS INVISÍVEIS NAS LATERAIS DO BANNER */
+.btn-seta {
+  position: absolute;
+  top: 0;
+  width: 50%;                 /* Cada lado ocupa exatamente metade do banner */
+  height: 100%;               /* Ocupa a altura inteira do banner */
+  background: transparent;    /* Fundo 100% invisível */
+  border: none;
+  outline: none;
+  color: transparent;         /* Esconde o ícone/texto da seta */
+  cursor: pointer;            /* Mostra a mãozinha de clique ao passar o mouse */
+  z-index: 4;                 /* Fica acima da imagem para capturar o clique */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* LADO ESQUERDO (Recuar slide) */
+.seta-esquerda {
+  left: 0;
+}
+
+/* LADO DIREITO (Avançar slide) */
+.seta-direita {
+  right: 0;
+}
+
+/* BOLINHAS INDICADORAS NO RODAPÉ */
+.indicadores-carrossel {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.bolinha {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #f4f4c2d7;
+  transition: all 0.3s ease;
+}
+
+.bolinha.ativa {
+  background-color: #fee0e6;
+  width: 24px; /* Deixa a bolinha ativa mais compridinha como na foto da Lu */
+  border-radius: 10px;
 }
 
 /* GAVETA LATERAL DE CARRINHO */
@@ -890,4 +929,147 @@ ESTILOS DA PÁGINA DE CATEGORIAS (produtos.html)
   .sidebar-filtros {
     width: 100%;
   }
+}
+
+.select-opcao {
+  font-family: 'Fredoka', sans-serif;
+  width: 100%;
+  padding: 9px 12px;
+  margin-bottom: 10px;
+  border: 2px solid #fbcfe8;
+  border-radius: 14px;
+  background: #fffcf9;
+  color: #9d174d;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+}
+.select-opcao:focus { border-color: #f38798; }
+
+.item-gaveta { gap: 12px; align-items: flex-start; }
+
+.img-item-gaveta {
+  width: 64px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #fbcfe8;
+  flex-shrink: 0;
+}
+
+.info-item-gaveta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #6b3724;
+}
+.info-item-gaveta strong { font-size: 0.95rem; }
+.preco-unit { font-size: 0.85rem; color: #9a7b6f; margin: 0; }
+
+.controle-qtd { display: inline-flex; align-items: center; margin-top: 4px; }
+
+.controle-qtd button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #f8c5cd;
+  background: #fff;
+  color: #b41b46;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.controle-qtd button:first-child { border-radius: 10px 0 0 10px; }
+.controle-qtd button:last-child { border-radius: 0 10px 10px 0; }
+.controle-qtd button:hover { background: #f38798; color: #fff; }
+
+.controle-qtd span {
+  min-width: 38px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-top: 1px solid #f8c5cd;
+  border-bottom: 1px solid #f8c5cd;
+  font-weight: 600;
+  color: #6b3724;
+}
+
+.lado-direito-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 72px;
+}
+.lado-direito-item .btn-remover { font-size: 1rem; color: #b41b46; }
+.subtotal-item { font-size: 0.95rem; color: #6b3724; white-space: nowrap; }
+
+/* LISTA DE AVALIAÇÕES */
+.grid-avaliacoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 20px auto 0;
+}
+
+/* CARD DE CADA AVALIAÇÃO */
+.card-avaliacao {
+  background: #ffecdc;
+  border: 1px solid #fbcfe8;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(190, 24, 93, 0.1);
+  padding: 20px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card-avaliacao:hover {
+  transform: translateY(-5px);
+  position: relative;
+}
+
+.card-avaliacao .estrelas {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.card-avaliacao .texto-avaliacao {
+  font-family: 'Fredoka', sans-serif;
+  color: #6b3724;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  word-break: break-word; /* quebra palavras gigantes tipo "vruuuuuum" */
+}
+
+.card-avaliacao .nome-cliente {
+  font-family: 'Pacifico', cursive;
+  color: #b41b46;
+  font-size: 1rem;
+}
+
+.btn-excluir-avaliacao {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.btn-excluir-avaliacao:hover {
+  opacity: 1;
 }

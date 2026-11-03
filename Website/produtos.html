@@ -18,7 +18,7 @@
   </a>
 
   <a href="index.html">
-    <img src="imag_web/Manu_boneca.png" alt="Ateliê da Manu" class="logo-boneca-cat">
+    <img src="imag_web/Logo_AteliedaManu.png" alt="Ateliê da Manu" class="logo-atelie">
   </a>
 
   <!-- ÍCONE DO CARRINHO (CLICÁVEL) -->
@@ -67,17 +67,24 @@
 
         <div class="card-produto" data-categoria="imas" data-nome="kit ima redondo">
           <img src="imagens/ima_redondo.png" alt="Kit ímã redondo" class="img-produto">
-          <h3>Kit Ímã Redondo (44mm, 4 un)</h3>
+          <h3>Kit Ímã Redondo (4 unidades)</h3>
           <p class="preco">R$ 24,00</p>
           <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit Ímã Redondo', 24.00)">Encomendar 📲</a>
         </div>
 
-        <div class="card-produto" data-categoria="natal" data-nome="enfeite de natal">
-          <img src="imagens/EnfeitedeNatal.png" alt="Enfeite de Natal" class="img-produto">
+        <div class="card-produto" data-categoria="natal" data-nome="Enfeite de Natal">
+          <img src="imagens/EnfeitedeNatal.png" alt="Enfeites de Natal" class="img-produto">
           <h3>Enfeite de Natal</h3>
+          <select class="select-opcao" onchange="atualizarPrecoCard(this)">
+            <option value="12.00" data-rotulo="1 unidade">1 unidade — R$ 12,00</option>
+            <option value="30.00" data-rotulo="3 unidades">3 unidades — R$ 30,00</option>
+            <option value="55.00" data-rotulo="6 unidades">6 unidades — R$ 55,00</option>
+          </select>
           <p class="preco">A partir de R$ 12,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Enfeite de Natal', 12.00)">Encomendar 📲</a>
-        </div>
+          <a class="btn-comprar" onclick="adicionarComOpcao(event, 'Enfeite de Natal')">
+            Encomendar 📲
+      </a>
+    </div>
 
         <div class="card-produto" data-categoria="chaveiros" data-nome="chaveiro abridor lata">
           <img src="imagens/abridordelata.png" alt="Chaveiro Abridor Lata" class="img-produto">
@@ -114,12 +121,22 @@
           <a class="btn-comprar" onclick="adicionarAoCarrinho('Caixinha de Natal', 59.90)">Encomendar 📲</a>
         </div>
 
-        <div class="card-produto" data-categoria="imas" data-nome="kit 12 imas">
+        <div class="card-produto" data-categoria="imas" data-nome="Kit de Ímãs">
           <img src="imagens/Kit_12imas.jpeg" alt="Kit de Ímãs" class="img-produto">
           <h3>Kit de Ímãs (5x5 cm)</h3>
+          <select class="select-opcao" onchange="atualizarPrecoCard(this)">
+            <option value="18.00" data-rotulo="Kit 2">Kit 2 — R$ 18,00</option>
+            <option value="30.00" data-rotulo="Kit 4">Kit 4 — R$ 30,00</option>
+            <option value="42.00" data-rotulo="Kit 6">Kit 6 — R$ 42,00</option>
+            <option value="52.00" data-rotulo="Kit 8">Kit 8 — R$ 52,00</option>
+            <option value="60.00" data-rotulo="Kit 10">Kit 10 — R$ 60,00</option>
+            <option value="69.00" data-rotulo="Kit 12">Kit 12 — R$ 69,00</option>
+          </select>
           <p class="preco">A partir de R$ 18,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit de Ímãs 5x5', 18.00)">Encomendar 📲</a>
-        </div>
+          <a class="btn-comprar" onclick="adicionarComOpcao(event, 'Kit de Ímãs')">
+            Encomendar 📲
+        </a>
+</div>
 
       </section>
 
