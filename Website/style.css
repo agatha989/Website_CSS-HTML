@@ -196,7 +196,7 @@ h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 600; }
 .btn-carrinho-float {
   width: 42px; height: 42px; border-radius: 50%; border: none; flex-shrink: 0;
   background: var(--ameixa); color: #fff; font-size: 1rem; cursor: pointer;
-  box-shadow: 0 4px 12px rgba(111, 69, 83, .3); transition: transform .2s, background .2s;
+  transition: transform .2s, background .2s;
 }
 .btn-carrinho-float:hover { background: #aa7b93; transform: scale(1.1); }
 
