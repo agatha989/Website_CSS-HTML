@@ -4,46 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produtos | Ateliê da Manu</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="imag_web/Logo_Manu.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="pagina-categoria">
+<body>
 
-  <!-- CABEÇALHO SIMPLIFICADO DE NAVEGAÇÃO COM CARRINHO -->
-<header class="header-simples-cat">
-  <a href="index.html" class="btn-voltar">
-    <i class="fa-solid fa-arrow-left"></i> Voltar para o Início
-  </a>
-
-  <a href="index.html">
-    <img src="imag_web/Logo_Manu.png" alt="Ateliê da Manu" class="logo-atelie">
-  </a>
-
-  <!-- ÍCONE DO CARRINHO (CLICÁVEL) -->
-  <div class="acoes-usuario">
-    <div class="item-acao carrinho">
-      <i class="fa-solid fa-bag-shopping"></i>
-      <span class="badge-carrinho">0</span>
-    </div>
+  <!-- BARRA DO TOPO -->
+  <div class="barra-topo">
+    <span><i class="fa-solid fa-truck"></i>Produção sob encomenda</span>
+    <span><i class="fa-solid fa-gift"></i>Presentes personalizados</span>
+    <span><i class="fa-solid fa-lock"></i>Pagamento seguro</span>
+    <span><i class="fa-solid fa-heart"></i>Atendimento com carinho</span>
   </div>
-</header>
+
+  <!-- CABEÇALHO: busca | logo | ícones -->
+  <header class="cabecalho">
+    <div class="box-busca">
+      <input type="text" id="buscaTopo" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+      <button onclick="buscarNoTopo()" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <a href="index.html"><img src="imag_web/Logo_Manu.png" alt="Ateliê da Manu Personalizados" class="logo-atelie"></a>
+
+    <div class="acoes-usuario">
+      <a href="https://wa.me/5521980033100" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <button class="btn-carrinho-topo" aria-label="Abrir carrinho">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="badge-carrinho">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MENU EM PÍLULA -->
+  <nav class="menu-pilula">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="produtos.html?cat=imas">Ímãs Personalizados</a></li>
+      <li><a href="produtos.html?cat=chaveiros">Chaveiros</a></li>
+      <li><a href="produtos.html?cat=bottons">Bottons</a></li>
+      <li><a href="produtos.html?cat=natal">Especial Natal</a></li>
+      <li><a href="produtos.html?cat=todos">Todos os Produtos</a></li>
+    </ul>
+  </nav>
 
   <main class="container-categoria-pagina">
-    <div class="titulo-secao-cat">
-      <h1 id="tituloCategoria">Nossos Produtos ✨</h1>
-    </div>
+    <h1 id="tituloCategoria">Nossos Produtos ✨</h1>
 
     <div class="layout-categoria">
-      
-      <!-- BARRA LATERAL DE FILTROS -->
+      <!-- FILTRO LATERAL -->
       <aside class="sidebar-filtros">
-        <div class="box-busca-sidebar">
-          <input type="text" placeholder="Pesquisar produto..." id="buscaSidebar" onkeyup="filtrarNaPagina()">
-          <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-        
         <h3>Categorias</h3>
         <ul class="lista-cat-sidebar">
           <li><a href="produtos.html?cat=todos" data-cat="todos">Todos os Produtos</a></li>
@@ -54,111 +64,33 @@
         </ul>
       </aside>
 
-      <!-- GRADE DE PRODUTOS -->
-      <section class="grid-categoria-produtos" id="gridProdutosCat">
-        
-        <!-- PRODUTOS -->
-        <div class="card-produto" data-categoria="imas" data-nome="calendario magnetico">
-          <img src="imagens/calendario.png" alt="Calendário magnético" class="img-produto">
-          <h3>Calendário magnético</h3>
-          <p class="preco">R$ 29,90</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Calendário magnético', 29.90)">Encomendar 📲</a>
-        </div>
-
-        <div class="card-produto" data-categoria="imas" data-nome="kit ima redondo">
-          <img src="imagens/ima_redondo.png" alt="Kit ímã redondo" class="img-produto">
-          <h3>Kit Ímã Redondo (4 unidades)</h3>
-          <p class="preco">R$ 24,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit Ímã Redondo', 24.00)">Encomendar 📲</a>
-        </div>
-
-        <div class="card-produto" data-categoria="natal" data-nome="Enfeite de Natal">
-          <img src="imagens/EnfeitedeNatal.png" alt="Enfeites de Natal" class="img-produto">
-          <h3>Enfeite de Natal</h3>
-          <select class="select-opcao" onchange="atualizarPrecoCard(this)">
-            <option value="12.00" data-rotulo="1 unidade">1 unidade — R$ 12,00</option>
-            <option value="30.00" data-rotulo="3 unidades">3 unidades — R$ 30,00</option>
-            <option value="55.00" data-rotulo="6 unidades">6 unidades — R$ 55,00</option>
-          </select>
-          <p class="preco">A partir de R$ 12,00</p>
-          <a class="btn-comprar" onclick="adicionarComOpcao(event, 'Enfeite de Natal')">
-            Encomendar 📲
-      </a>
-    </div>
-
-        <div class="card-produto" data-categoria="chaveiros" data-nome="chaveiro abridor lata">
-          <img src="imagens/abridordelata.png" alt="Chaveiro Abridor Lata" class="img-produto">
-          <h3>Chaveiro Abridor Lata</h3>
-          <p class="preco">R$ 12,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Chaveiro Abridor Lata', 12.00)">Encomendar 📲</a>
-        </div>
-        
-        <div class="card-produto" data-categoria="chaveiros" data-nome="chaveiro abridor garrafa">
-          <img src="imagens/AbridordeGarrafa.png" alt="Chaveiro Abridor Garrafa" class="img-produto">
-          <h3>Chaveiro Abridor Garrafa</h3>
-          <p class="preco">R$ 13,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Chaveiro Abridor Garrafa', 13.00)">Encomendar 📲</a>
-        </div>
-
-        <div class="card-produto" data-categoria="bottons" data-nome="kit 5 bottons">
-          <img src="imagens/5_bottons.png" alt="Kit 5 bottons" class="img-produto">
-          <h3>Kit 5 Bottons (44mm)</h3>
-          <p class="preco">R$ 20,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Kit 5 Bottons', 20.00)">Encomendar 📲</a>
-        </div>
-
-        <div class="card-produto" data-categoria="chaveiros" data-nome="chaveiro espelho">
-          <img src="imagens/chaveiro_espelho.png" alt="Chaveiro Espelho" class="img-produto">
-          <h3>Chaveiro Espelho (58mm)</h3>
-          <p class="preco">R$ 15,00</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Chaveiro Espelho', 15.00)">Encomendar 📲</a>
-        </div>
-
-        <div class="card-produto" data-categoria="natal" data-nome="caixinha de natal">
-          <img src="imagens/WhatsApp Image 2026-10-31 at 17.42.11.jpeg" alt="Caixinha de Natal" class="img-produto">
-          <h3>Caixinha de Natal</h3>
-          <p class="preco">R$ 59,90</p>
-          <a class="btn-comprar" onclick="adicionarAoCarrinho('Caixinha de Natal', 59.90)">Encomendar 📲</a>
-        </div>
-
-        <div class="card-produto" data-categoria="imas" data-nome="Kit de Ímãs">
-          <img src="imagens/Kit_12imas.jpeg" alt="Kit de Ímãs" class="img-produto">
-          <h3>Kit de Ímãs (5x5 cm)</h3>
-          <select class="select-opcao" onchange="atualizarPrecoCard(this)">
-            <option value="18.00" data-rotulo="Kit 2">Kit 2 — R$ 18,00</option>
-            <option value="30.00" data-rotulo="Kit 4">Kit 4 — R$ 30,00</option>
-            <option value="42.00" data-rotulo="Kit 6">Kit 6 — R$ 42,00</option>
-            <option value="52.00" data-rotulo="Kit 8">Kit 8 — R$ 52,00</option>
-            <option value="60.00" data-rotulo="Kit 10">Kit 10 — R$ 60,00</option>
-            <option value="69.00" data-rotulo="Kit 12">Kit 12 — R$ 69,00</option>
-          </select>
-          <p class="preco">A partir de R$ 18,00</p>
-          <a class="btn-comprar" onclick="adicionarComOpcao(event, 'Kit de Ímãs')">
-            Encomendar 📲
-        </a>
-</div>
-
-      </section>
-
+      <!-- GRADE DE PRODUTOS (o JavaScript preenche sozinho a partir da lista em script.js) -->
+      <section class="grid-produtos" id="gridProdutosCat"></section>
     </div>
   </main>
 
-  <!-- GAVETA LATERAL DO CARRINHO -->
+  <!-- GAVETA DO CARRINHO -->
   <div id="painelCarrinho" class="gaveta-carrinho">
     <div class="header-gaveta">
       <h3>Seu Carrinho 💕</h3>
-      <button onclick="fecharCarrinho()" class="btn-fechar-gaveta">&times;</button>
+      <button onclick="fecharCarrinho()" class="btn-fechar-gaveta" aria-label="Fechar">&times;</button>
     </div>
     <div id="itensCarrinhoGaveta" class="corpo-gaveta"></div>
     <div class="footer-gaveta">
-      <div class="total-linha">
-        <span>Total:</span>
-        <strong id="valorTotalCarrinho">R$ 0,00</strong>
-      </div>
+      <div class="total-linha"><span>Total:</span><strong id="valorTotalCarrinho">R$ 0,00</strong></div>
       <button onclick="enviarPedidoFinalWhatsApp()" class="btn-finalizar-wa">Finalizar Pedido no WhatsApp 📲</button>
     </div>
   </div>
   <div id="overlayCarrinho" onclick="fecharCarrinho()"></div>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <div class="redes">
+      <a href="https://wa.me/5521980033100" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/ateliedamanupersonalizados/" target="_blank" rel="noopener" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+    <p>© Ateliê da Manu Personalizados — feito com carinho 💕</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
