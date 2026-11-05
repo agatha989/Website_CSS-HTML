@@ -7,8 +7,7 @@
 const PRODUTOS = [
   { id: "calendario", nome: "Calendário Magnético", categoria: "imas", img: "imagens/calendario.png", preco: 29.9, destaque: true },
   { id: "ima-redondo", nome: "Kit Ímã Redondo (4 unidades)", categoria: "imas", img: "imagens/ima_redondo.png", preco: 24 },
-  { id: "ima-quadrado", nome: "Kit 2 Ímãs Quadrados (5x5 cm)", categoria: "imas", img: "imagens/ima_quadrado.png", preco: 24, destaque: true },
-  { id: "kit-imas", nome: "Kit de Ímãs (5x5 cm)", categoria: "imas", img: "imagens/Kit_12imas.jpeg",
+  { id: "kit-ima-quadrado", nome: "Kit Ímãs Quadrados (5x5 cm)", categoria: "imas", img: "imagens/ima_quadrado.png",
     opcoes: [
       { rotulo: "Kit 2", preco: 18 }, { rotulo: "Kit 4", preco: 30 }, { rotulo: "Kit 6", preco: 42 },
       { rotulo: "Kit 8", preco: 52 }, { rotulo: "Kit 10", preco: 60 }, { rotulo: "Kit 12", preco: 69 },
