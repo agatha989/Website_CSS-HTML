@@ -20,9 +20,11 @@ const PRODUTOS = [
   { id: "enfeite-natal", nome: "Enfeite de Natal", categoria: "natal", img: "imagens/EnfeitedeNatal.png",
     opcoes: [ { rotulo: "1 unidade", preco: 12 }, { rotulo: "3 unidades", preco: 30 }, { rotulo: "6 unidades", preco: 55 } ] },
   { id: "caixinha-natal", nome: "Caixinha de Natal", categoria: "natal", img: "imagens/caixinha_natal.jpeg", preco: 59.9 },
-  { id: "photocard", nome: "Photocard Personalizado", categoria: "photocards", img: "imagens/photocard.jpeg",
+  { id: "photocard", nome: "Photocard Personalizado", categoria: "photocards", img: "imagens/photocard.png",
     opcoes: [ {rotulo: "unidade", preco: 3}, { rotulo: "Kit 10 personalizado na frente", preco: 20 }, { rotulo: "Kit 10 personalizado frente e verso", preco: 26 } ] },
-];
+  { id: "foto-ima", nome: "Foto Ímã lembranças estilo polaroid", categoria: "imas", img: "imagens/foto_ima.png",
+    opcoes: [ {rotulo: "unidade", preco: 5.5}, { rotulo: "Kit 10", preco: 50 } ] },
+  ];
 
 const TITULOS_CATEGORIA = {
   todos: "Todos os Produtos ✨",
