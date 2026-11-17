@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOS WOMAN — Você não está sozinha</title>
+
+    <!-- Tailwind CSS (layout responsivo) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fontes: Lora (títulos editoriais) e DM Sans (leitura limpa) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- 1º: cores e fontes do Tailwind (lem os nomes das cores) -->
+    <script src="JS/tailwind-config.js"></script>
+    <!-- 2º: nosso CSS (paleta em :root, animações, auras, ondas) -->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body class="antialiased selection:bg-sos-rosa/30 selection:text-sos-escuro">
+
+    <!-- ==========================================================================
+         FUNDO: ONDAS DO MAR
+         O CSS anima o deslocamento lateral (onda-1..4) e o balanço vertical.
+         As cores dos traços usam as variáveis da paleta.
+         ========================================================================== -->
+    <svg class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-60" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <g class="onda-vai-e-vem onda-vai-e-vem-1"><path class="onda onda-1" d="M-720 140 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0" stroke="rgb(var(--sos-rosa))" stroke-width="1.4"/></g>
+        <g class="onda-vai-e-vem onda-vai-e-vem-2"><path class="onda onda-2" d="M-960 380 q240 -75 480 0 t480 0 t480 0 t480 0 t480 0 t480 0 t480 0 t480 0" stroke="rgb(var(--sos-azul))" stroke-width="1.2"/></g>
+        <g class="onda-vai-e-vem onda-vai-e-vem-3"><path class="onda onda-3" d="M-840 650 q210 -58 420 0 t420 0 t420 0 t420 0 t420 0 t420 0 t420 0 t420 0" stroke="rgb(var(--sos-amarelo))" stroke-width="1.4"/></g>
+        <g class="onda-vai-e-vem onda-vai-e-vem-4"><path class="onda onda-4" d="M-600 840 q150 -46 300 0 t300 0 t300 0 t300 0 t300 0 t300 0 t300 0 t300 0 t300 0" stroke="rgb(var(--sos-laranja))" stroke-width="1.1"/></g>
+    </svg>
+
+    <!-- ==========================================================================
+         1. CABEÇALHO / NAVEGAÇÃO
+         ========================================================================== -->
+    <header class="sticky top-0 z-40 bg-sos-creme/90 backdrop-blur-md border-b border-sos-borda/25">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 lg:h-[104px] flex items-center justify-between">
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center group focus:outline-none" aria-label="SOS WOMAN Início">
+                <img src="imagens/logo-sos-woman.png" alt="SOS WOMAN" class="h-14 sm:h-16 lg:h-[72px] w-auto transition-transform duration-300 group-hover:scale-95">
+            </a>
+
+            <!-- Links (desktop) -->
+            <nav class="hidden lg:flex items-center gap-10 text-[15px] font-medium text-sos-escuro">
+                <a href="#como-funciona" class="hover:text-sos-uva transition-colors">Como funciona</a>
+                <a href="#rede-apoio" class="hover:text-sos-uva transition-colors">Rede de apoio</a>
+                <a href="#privacidade" class="hover:text-sos-uva transition-colors">Sobre o SOS WOMAN</a>
+            </nav>
+
+            <!-- Botão Saída Rápida -->
+            <button onclick="quickExit()" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-sos-creme border border-sos-borda text-sos-escuro text-sm sm:text-base font-semibold hover:bg-sos-uva hover:text-white hover:border-sos-uva transition-all duration-300 cursor-pointer" title="Fechar imediatamente e abrir uma página neutra">
+                <span>Saída rápida</span>
+                <span>↗</span>
+            </button>
+        </div>
+
+        <!-- Sub-barra de navegação (tablet e mobile) -->
+        <nav class="flex lg:hidden items-center justify-between max-w-6xl mx-auto px-4 sm:px-6 pb-3.5 text-xs sm:text-sm font-medium text-sos-escuro border-t border-sos-borda/25 pt-2.5">
+            <a href="#como-funciona" class="hover:text-sos-uva transition-colors">Como funciona</a>
+            <a href="#rede-apoio" class="hover:text-sos-uva transition-colors">Rede de apoio</a>
+            <a href="#privacidade" class="hover:text-sos-uva transition-colors">Sobre o SOS WOMAN</a>
+        </nav>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ==========================================================================
+             2. HERO (abertura com auras e ilustração do abraço)
+             ========================================================================== -->
+        <section class="relative pt-10 pb-20 lg:pt-14 lg:pb-24 overflow-hidden">
+            <!-- Auras: classe da cor + classe da força -->
+            <div class="aura-blob aura-rosa aura-media w-[650px] h-[650px] lg:w-[980px] lg:h-[920px] -top-32 right-0"></div>
+            <div class="aura-blob aura-amarelo aura-forte aura-delay-1 w-[550px] h-[550px] lg:w-[760px] lg:h-[820px] -top-12 right-1/4"></div>
+            <div class="aura-blob aura-azul aura-media aura-delay-2 w-[500px] h-[500px] lg:w-[720px] lg:h-[700px] top-36 -left-36"></div>
+            <div class="aura-blob aura-laranja aura-suave aura-delay-1 w-[480px] h-[480px] lg:w-[640px] lg:h-[640px] bottom-0 left-1/3"></div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-10 items-center">
+
+                    <!-- Coluna de texto -->
+                    <div class="md:col-span-6 lg:col-span-6 reveal-up">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sos-chip mb-7">
+                            <span class="w-2 h-2 rounded-full bg-sos-laranja animate-pulse"></span>
+                            <span class="text-[11px] font-bold tracking-wider uppercase text-sos-uva">Acolhimento sem julgamentos</span>
+                        </div>
+
+                        <h1 class="font-serif text-[42px] sm:text-[50px] lg:text-[74px] leading-[1.1] font-normal text-sos-escuro mb-6">
+                            Você não está <span class="italic font-normal text-sos-uva block sm:inline lg:block text-[56px] sm:text-[70px] lg:text-[88px] leading-[1.08]">sozinha.</span>
+                        </h1>
+
+                        <p class="text-[21px] lg:text-[25px] leading-[1.4] font-medium text-sos-escuro mb-4">
+                            Um espaço seguro para relatar e encontrar apoio real.
+                        </p>
+
+                        <p class="text-base lg:text-[18px] text-sos-texto leading-[1.6] mb-8 max-w-lg">
+                            Registre ocorrências de forma totalmente sigilosa, compartilhe vivências sem exposição e localize delegacias especializadas (DEAM) e centros de acolhimento próximos a você.
+                        </p>
+
+                        <!-- Botões principais -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-5">
+                            <button onclick="openRelatoModal()" class="px-8 py-4 rounded-full bg-sos-uva text-white text-base font-semibold shadow-lg shadow-sos-uva/20 hover:bg-sos-uva-escuro hover:-translate-y-0.5 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2">
+                                <span>Quero ser acolhida</span>
+                                <span>↗</span>
+                            </button>
+                            <a href="#rede-apoio" class="px-7 py-4 rounded-full bg-sos-creme text-sos-escuro text-base font-semibold border border-sos-borda hover:border-sos-uva hover:text-sos-uva hover:-translate-y-0.5 transition-all duration-300 text-center">
+                                Encontrar apoio
+                            </a>
+                        </div>
+
+                        <p class="text-xs sm:text-sm text-sos-texto">
+                            Sem cadastro. Sem julgamentos. No seu tempo.
+                        </p>
+                    </div>
+
+                    <!-- Coluna visual: ilustração do abraço + cartão inclinado -->
+                    <div class="md:col-span-6 lg:col-span-6 reveal-up delay-200">
+                        <div class="card-3d-wrapper relative mx-auto max-w-[320px] sm:max-w-[360px] lg:max-w-[460px]">
+                            <div class="card-3d relative aspect-square rounded-full bg-sos-creme overflow-hidden flex items-center justify-center shadow-xl shadow-sos-uva/10">
+
+                                <img src="imagens/abraco.png" alt="Duas figuras se abraçando, desenhadas em traços delicados" class="relative z-10 w-full h-full object-cover rounded-full">
+                            </div>
+
+                            <!-- Lembrete de acolhimento -->
+                            <div class="relative z-20 -mt-12 sm:-mt-14 mx-auto sm:ml-2 sm:mr-auto max-w-[289px] bg-white rounded-[20px] px-6 py-4 shadow-suave -rotate-3 border border-sos-chip">
+                                <p class="font-serif italic text-[19px] sm:text-[20px] text-sos-uva leading-[1.4]">Aqui, a sua voz importa.</p>
+                                <p class="text-xs text-sos-texto mt-0.5">E a sua história merece cuidado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             3. FAIXA DE PILARES
+             ========================================================================== -->
+        <div class="bg-sos-faixa py-7 reveal-up">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <span class="font-bold tracking-wider uppercase text-[11px] sm:text-xs text-sos-uva">Cuidado em cada detalhe</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-8 text-sm sm:text-base font-medium text-sos-escuro">
+                    <span class="flex items-center gap-2"><strong class="text-sos-uva font-serif">01</strong> Sua identidade preservada</span>
+                    <span class="flex items-center gap-2"><strong class="text-sos-uva font-serif">02</strong> Escuta sem julgamentos</span>
+                    <span class="flex items-center gap-2"><strong class="text-sos-uva font-serif">03</strong> Apoio perto de você</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             4. COMO FUNCIONA (3 cards com efeito 3D)
+             ========================================================================== -->
+        <section id="como-funciona" class="py-16 lg:py-24 relative overflow-hidden">
+            <div class="aura-blob aura-roxo aura-leve w-[560px] h-[560px] -left-32 top-10"></div>
+            <div class="aura-blob aura-amarelo aura-suave aura-delay-2 w-[620px] h-[620px] -right-24 bottom-0"></div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+                <!-- Cabeçalho da seção -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6 reveal-up">
+                    <div class="max-w-2xl">
+                        <span class="text-[11px] sm:text-xs font-bold tracking-wider uppercase text-sos-uva block mb-2">Acolhimento, passo a passo</span>
+                        <h2 class="font-serif text-[31px] sm:text-[40px] lg:text-[46px] font-normal text-sos-escuro leading-[1.2]">
+                            Como o SOS WOMAN protege e apoia você
+                        </h2>
+                    </div>
+                    <p class="text-base lg:text-[18px] text-sos-texto leading-[1.55] max-w-md">
+                        Desenvolvemos uma jornada sem barreiras burocráticas para que você tenha voz e acesso rápido à proteção quando mais precisar.
+                    </p>
+                </div>
+
+                <!-- Grid de 3 cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
+
+                    <!-- Card 01 -->
+                    <div class="card-3d-wrapper reveal-up">
+                        <div class="card-3d h-full rounded-[28px] p-7 lg:p-8 bg-sos-card-rosa flex flex-col justify-between">
+                            <div class="card-3d-content">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-9 h-9 flex items-center justify-center text-sos-uva">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                    </div>
+                                    <span class="font-serif text-[26px] lg:text-[28px] font-normal text-sos-uva">01</span>
+                                </div>
+                                <h3 class="font-serif text-[24px] lg:text-[28px] leading-[1.2] font-normal text-sos-escuro mb-3.5">Relate sem se identificar</h3>
+                                <p class="text-[15px] lg:text-base text-sos-texto leading-[1.55] mb-8">
+                                    Escreva o que aconteceu ou registre um histórico de ocorrências. Não pedimos seu nome, CPF, e-mail ou telefone para criar um relato.
+                                </p>
+                            </div>
+                            <button onclick="openRelatoModal()" class="card-3d-content inline-flex items-center gap-1.5 text-[15px] font-semibold text-sos-uva hover:gap-2.5 transition-all cursor-pointer">
+                                <span>Começar meu relato</span>
+                                <span>↗</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 02 -->
+                    <div class="card-3d-wrapper reveal-up delay-100">
+                        <div class="card-3d h-full rounded-[28px] p-7 lg:p-8 bg-sos-card-azul flex flex-col justify-between">
+                            <div class="card-3d-content">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-9 h-9 flex items-center justify-center text-sos-uva">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    </div>
+                                    <span class="font-serif text-[26px] lg:text-[28px] font-normal text-sos-uva">02</span>
+                                </div>
+                                <h3 class="font-serif text-[24px] lg:text-[28px] leading-[1.2] font-normal text-sos-escuro mb-3.5">Localize pontos de apoio</h3>
+                                <p class="text-[15px] lg:text-base text-sos-texto leading-[1.55] mb-8">
+                                    Consulte endereços, horários de funcionamento e contatos de Delegacias da Mulher (DEAM), Casas da Mulher Brasileira e CRAS próximos.
+                                </p>
+                            </div>
+                            <a href="#rede-apoio" class="card-3d-content inline-flex items-center gap-1.5 text-[15px] font-semibold text-sos-uva hover:gap-2.5 transition-all">
+                                <span>Encontrar acolhimento</span>
+                                <span>↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 03 -->
+                    <div class="card-3d-wrapper reveal-up delay-200">
+                        <div class="card-3d h-full rounded-[28px] p-7 lg:p-8 bg-sos-card-amarelo flex flex-col justify-between">
+                            <div class="card-3d-content">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-9 h-9 flex items-center justify-center text-sos-uva">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                    </div>
+                                    <span class="font-serif text-[26px] lg:text-[28px] font-normal text-sos-uva">03</span>
+                                </div>
+                                <h3 class="font-serif text-[24px] lg:text-[28px] leading-[1.2] font-normal text-sos-escuro mb-3.5">Navegue com Saída Rápida</h3>
+                                <p class="text-[15px] lg:text-base text-sos-texto leading-[1.55] mb-8">
+                                    Se alguém se aproximar da sua tela, clique em Saída Rápida no topo da página para ser redirecionada instantaneamente para uma página neutra.
+                                </p>
+                            </div>
+                            <button onclick="quickExit()" class="card-3d-content inline-flex items-center gap-1.5 text-[15px] font-semibold text-sos-uva hover:gap-2.5 transition-all cursor-pointer">
+                                <span>Saiba como se proteger</span>
+                                <span>↗</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             5. PRIVACIDADE E ACOLHIMENTO
+             ========================================================================== -->
+        <section id="privacidade" class="py-8 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 reveal-up">
+                <div class="card-3d-wrapper">
+                    <div class="card-3d relative overflow-hidden rounded-[28px] lg:rounded-[38px] bg-sos-lilas p-7 sm:p-10 lg:p-14">
+
+                        <!-- Forma orgânica lilás interna -->
+                        <div class="absolute -left-24 -top-20 w-[450px] h-[450px] rounded-full bg-sos-lilas-forte pointer-events-none"></div>
+
+                        <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+                            <!-- Cartão rotacionado: compromisso de sigilo -->
+                            <div class="md:col-span-5">
+                                <div class="bg-sos-creme rounded-[24px] p-7 sm:p-8 shadow-sm rotate-3 transition-transform duration-300 hover:rotate-0">
+                                    <div class="w-10 h-10 text-sos-uva flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                    </div>
+                                    <h3 class="font-serif text-[25px] lg:text-[29px] font-normal text-sos-escuro mb-2">Sua história é sua.</h3>
+                                    <p class="text-[15px] lg:text-[17px] text-sos-texto leading-[1.5]">Você escolhe o que compartilhar. Nós priorizamos o seu cuidado.</p>
+                                </div>
+                            </div>
+
+                            <!-- Texto explicativo -->
+                            <div class="md:col-span-7 md:pl-4">
+                                <span class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-sos-uva block mb-2">Privacidade e Acolhimento</span>
+                                <h2 class="font-serif text-[30px] sm:text-[32px] lg:text-[40px] font-normal text-sos-escuro leading-[1.2] mb-4">
+                                    Seu espaço. Seu tempo. Suas escolhas.
+                                </h2>
+                                <p class="text-base lg:text-[18px] text-sos-texto leading-[1.55] mb-5">
+                                    Compartilhe vivências sem exposição, sem pressa e sem precisar se justificar. Aqui, você encontra uma escuta respeitosa para dar o próximo passo.
+                                </p>
+                                <div class="inline-flex items-center gap-2.5 text-sm lg:text-[15px] font-medium text-sos-uva">
+                                    <svg class="w-5 h-5 text-sos-uva shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    <span>Sem nome, CPF, e-mail ou telefone para relatar.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             6. REDE DE APOIO PERTO DE VOCÊ
+             ========================================================================== -->
+        <section id="rede-apoio" class="py-16 lg:py-24 relative overflow-hidden">
+            <div class="aura-blob aura-azul aura-suave aura-delay-1 w-[600px] h-[600px] right-0 top-12"></div>
+            <div class="aura-blob aura-rosa aura-suave w-[500px] h-[500px] -left-20 bottom-4"></div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+                    <!-- Busca por cidade/CEP -->
+                    <div class="md:col-span-6 lg:col-span-5 reveal-up">
+                        <span class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-sos-uva block mb-2">Uma rede para caminhar com você</span>
+                        <h2 class="font-serif text-[36px] sm:text-[40px] lg:text-[48px] font-normal text-sos-escuro leading-[1.2] mb-4">
+                            Existe apoio perto de você.
+                        </h2>
+                        <p class="text-base lg:text-[19px] text-sos-texto leading-[1.55] mb-7">
+                            Encontre lugares preparados para orientar, proteger e acolher você na sua região.
+                        </p>
+
+                        <!-- Formulário de busca -->
+                        <form onsubmit="buscarApoio(event)" class="space-y-3.5">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-5 flex items-center text-sos-uva">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                </span>
+                                <input id="campo-cidade" type="text" autocomplete="postal-code" maxlength="40" placeholder="Digite sua cidade ou CEP" aria-describedby="resultado-busca" class="w-full pl-[52px] pr-5 py-4 rounded-full bg-white border border-sos-input-borda text-base text-sos-escuro placeholder:text-sos-texto focus:outline-none focus:border-sos-uva">
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-2.5">
+                                <button type="submit" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-sos-uva text-white text-base font-semibold hover:bg-sos-uva-escuro transition-all cursor-pointer inline-flex items-center justify-center gap-2">
+                                    <span>Buscar apoio</span>
+                                    <span>↗</span>
+                                </button>
+                                <button type="button" onclick="usarLocalizacaoAtual()" class="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white border border-sos-borda text-sos-uva text-base font-semibold hover:border-sos-uva transition-all cursor-pointer inline-flex items-center justify-center gap-2">
+                                    <span>Usar minha localização</span>
+                                </button>
+                            </div>
+                        </form>
+                        <p id="resultado-busca" class="text-xs sm:text-[13px] text-sos-texto mt-3.5">
+                            Você decide se quer compartilhar sua localização.
+                        </p>
+                    </div>
+                    
+                    <!-- Pontos de apoio (o mapa entra aqui depois da busca) -->
+                    <div class="md:col-span-6 lg:col-span-7 reveal-up delay-100">
+                        <div class="rounded-[28px] lg:rounded-[36px] p-5 sm:p-6 bg-sos-azul-claro">
+                            <span class="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-sos-uva block px-1 pt-1 mb-3.5">Conheça os pontos de apoio</span>
+
+                            <!-- Mapa do Google Maps: começa escondido e só aparece depois da busca -->
+                            <div id="area-apoio" class="hidden relative overflow-hidden rounded-[20px] bg-white h-[240px] border border-sos-azul/30 mb-3.5">
+                                <iframe id="mapa-apoio" title="Mapa dos pontos de apoio" class="absolute inset-0 w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="about:blank"></iframe>
+                            </div>
+
+                            <!-- Lista de pontos: os cards abaixo são o estado inicial.
+                                 O JavaScript substitui por versões com link para o Google Maps. -->
+                            <div id="lista-pontos-apoio" class="space-y-3" aria-live="polite">
+
+                                <!-- Item 1: DEAM -->
+                                <div class="card-3d group p-4 sm:p-[18px] rounded-[20px] bg-sos-branco-quente flex items-center justify-between gap-4">
+                                    <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-[16px] bg-sos-card-rosa text-sos-uva flex items-center justify-center shrink-0">
+                                            <svg class="w-5 h-5 sm:w-[22px] sm:h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <h4 class="font-medium text-sos-escuro text-base sm:text-[17px] leading-[1.3]">Delegacias da Mulher</h4>
+                                            <p class="text-[12px] sm:text-[13px] text-sos-texto mt-0.5">DEAM • Atendimento especializado</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-sos-uva text-lg shrink-0 group-hover:translate-x-1 transition-transform" aria-hidden="true">↗</span>
+                                </div>
+
+                                <!-- Item 2: Casa da Mulher Brasileira -->
+                                <div class="card-3d group p-4 sm:p-[18px] rounded-[20px] bg-sos-branco-quente flex items-center justify-between gap-4">
+                                    <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-[16px] bg-sos-card-amarelo text-sos-uva flex items-center justify-center shrink-0">
+                                            <svg class="w-5 h-5 sm:w-[22px] sm:h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <h4 class="font-medium text-sos-escuro text-base sm:text-[17px] leading-[1.3]">Casas da Mulher Brasileira</h4>
+                                            <p class="text-[12px] sm:text-[13px] text-sos-texto mt-0.5">Acolhimento e orientação em um só lugar</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-sos-uva text-lg shrink-0 group-hover:translate-x-1 transition-transform" aria-hidden="true">↗</span>
+                                </div>
+
+                                <!-- Item 3: CRAS -->
+                                <div class="card-3d group p-4 sm:p-[18px] rounded-[20px] bg-sos-branco-quente flex items-center justify-between gap-4">
+                                    <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-[16px] bg-sos-card-azul text-sos-uva flex items-center justify-center shrink-0">
+                                            <svg class="w-5 h-5 sm:w-[22px] sm:h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <h4 class="font-medium text-sos-escuro text-base sm:text-[17px] leading-[1.3]">Centros de referência</h4>
+                                            <p class="text-[12px] sm:text-[13px] text-sos-texto mt-0.5">CRAS • Acesso à rede de assistência social</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-sos-uva text-lg shrink-0 group-hover:translate-x-1 transition-transform" aria-hidden="true">↗</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             7. BANNER SAÍDA RÁPIDA
+             ========================================================================== -->
+        <section class="py-6 reveal-up">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="card-3d rounded-[28px] lg:rounded-[34px] bg-sos-azul-banner p-7 sm:p-9 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                    <div class="max-w-2xl">
+                        <span class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-sos-uva block mb-2">Seu cuidado vem primeiro</span>
+                        <h3 class="font-serif text-[30px] sm:text-[35px] lg:text-[38px] font-normal text-sos-escuro leading-[1.2] mb-3">Precisou sair? Tudo bem.</h3>
+                        <p class="text-base lg:text-[17px] text-sos-escuro leading-[1.55] mb-3">
+                            O botão Saída Rápida fica sempre no topo da página e leva você a uma página neutra, sem perguntas.
+                        </p>
+                        <p class="text-[13px] lg:text-sm text-sos-texto">
+                            Importante: a saída rápida não apaga o histórico do navegador.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-center gap-3 shrink-0 w-full sm:w-auto">
+                        <button onclick="quickExit()" class="w-full sm:w-auto px-8 py-4 rounded-full bg-sos-branco-quente text-sos-uva font-semibold text-base hover:bg-sos-uva hover:text-white transition-all cursor-pointer flex items-center justify-center gap-3">
+                            <span>Saída rápida</span>
+                            <span>↗</span>
+                        </button>
+                        <span class="text-xs sm:text-[13px] text-sos-texto">Discreto. Acessível. Sempre à mão.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             8. DÚVIDAS FREQUENTES
+             ========================================================================== -->
+        <section id="duvidas" class="py-16 lg:py-24 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+
+                    <div class="lg:col-span-5 reveal-up">
+                        <span class="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-sos-uva block mb-2">Para você se sentir mais segura</span>
+                        <h2 class="font-serif text-[31px] sm:text-[38px] lg:text-[42px] font-normal text-sos-escuro leading-[1.2] mb-3">
+                            A gente esclarece. Você fica à vontade.
+                        </h2>
+                        <p class="text-base lg:text-[17px] text-sos-texto">
+                            Informação também é uma forma de cuidado.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-7 divide-y divide-sos-divisor reveal-up delay-100">
+                        <div class="py-5 first:pt-0">
+                            <h4 class="font-medium text-sos-escuro text-[17px] lg:text-[18px] mb-2">Preciso me identificar para fazer um relato?</h4>
+                            <p class="text-[15px] lg:text-base text-sos-texto leading-[1.5]">Não. Você pode relatar sem informar nome, CPF, e-mail ou telefone.</p>
+                        </div>
+
+                        <div class="py-5">
+                            <h4 class="font-medium text-sos-escuro text-[17px] lg:text-[18px] mb-2">O relato substitui uma denúncia oficial?</h4>
+                            <p class="text-[15px] lg:text-base text-sos-texto leading-[1.5]">Não. O relato no SOS WOMAN não substitui um boletim de ocorrência ou o atendimento dos serviços públicos.</p>
+                        </div>
+
+                        <div class="py-5 border-b border-sos-divisor">
+                            <h4 class="font-medium text-sos-escuro text-[17px] lg:text-[18px] mb-2">A Saída Rápida apaga meu histórico?</h4>
+                            <p class="text-[15px] lg:text-base text-sos-texto leading-[1.5]">Não. Ela abre uma página neutra, mas não remove o histórico do navegador.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             9. CHAMADA FINAL
+             ========================================================================== -->
+        <section class="relative py-16 lg:py-20 overflow-hidden bg-sos-pessego reveal-up">
+            <div class="aura-blob aura-amarelo aura-forte w-[700px] h-[600px] -left-24 -top-36"></div>
+            <div class="aura-blob aura-rosa aura-forte aura-delay-1 w-[750px] h-[650px] left-1/4 -top-44"></div>
+            <div class="aura-blob aura-azul aura-forte aura-delay-2 w-[600px] h-[600px] right-0 -top-24"></div>
+
+            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                <h2 class="font-serif text-[32px] sm:text-[40px] lg:text-[43px] font-normal text-sos-escuro leading-[1.25] mb-3">
+                    O primeiro passo pode ser no seu tempo.
+                </h2>
+                <p class="text-[17px] sm:text-lg lg:text-[19px] text-sos-escuro mb-8">
+                    Você não precisa ter todas as respostas para buscar acolhimento.
+                </p>
+                <button onclick="openRelatoModal()" class="w-full sm:w-auto px-9 py-4 rounded-full bg-sos-uva text-white font-semibold text-base lg:text-[17px] hover:bg-sos-uva-escuro hover:-translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2">
+                    <span>Quero ser acolhida</span>
+                    <span>↗</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         10. RODAPÉ
+         ========================================================================== -->
+    <footer class="bg-sos-escuro text-sos-footer-texto py-12 lg:py-14 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-9 border-b border-sos-divisor-escuro">
+                <div>
+                    <span class="font-serif text-[27px] lg:text-[29px] font-normal text-sos-creme block mb-2">SOS WOMAN</span>
+                    <p class="text-sm lg:text-[15px] text-sos-footer-texto">SOS WOMAN • Cuidado que respeita você.</p>
+                </div>
+                <div class="md:text-left lg:pl-12">
+                    <p class="font-medium text-sos-creme text-xl lg:text-[21px] mb-1.5">Em risco imediato? Ligue 190.</p>
+                    <p class="text-[15px] lg:text-base text-sos-footer-texto">Para orientação e apoio à mulher, ligue 180.</p>
+                    <p class="text-[13px] text-sos-footer-texto/80 mt-1.5">O SOS WOMAN não substitui os serviços de emergência.</p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs lg:text-[13px] text-sos-footer-fraco gap-4">
+                <p>SOS WOMAN. Um espaço de escuta, respeito e proteção.</p>
+                <div class="flex flex-wrap gap-6 text-sos-footer-texto">
+                    <a href="#privacidade" class="hover:text-white transition-colors">Privacidade</a>
+                    <a href="#como-funciona" class="hover:text-white transition-colors">Sobre o SOS WOMAN</a>
+                    <a href="#duvidas" class="hover:text-white transition-colors">Acessibilidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         11. MODAL DE RELATO ANÔNIMO
+         ========================================================================== -->
+    <div id="modal-relato" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-sos-escuro/60 backdrop-blur-sm">
+        <div class="bg-sos-modal rounded-[2rem] max-w-lg w-full p-7 sm:p-9 shadow-2xl border border-sos-rosa/30 relative animate-fadeIn">
+            <button onclick="closeRelatoModal()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-white text-sos-escuro flex items-center justify-center hover:bg-sos-rosa/20 transition-colors cursor-pointer" aria-label="Fechar janela">
+                ✕
+            </button>
+
+            <span class="text-[11px] font-bold tracking-widest uppercase text-sos-roxo block mb-1">Espaço 100% Sigiloso</span>
+            <h3 class="font-serif text-3xl font-semibold text-sos-escuro mb-2">Escreva no seu tempo</h3>
+            <p class="text-xs sm:text-sm text-sos-texto/80 mb-5">
+                Não pedimos nenhum dado pessoal. Você pode usar este espaço para desabafar ou registrar datas e fatos importantes.
+            </p>
+
+            <textarea id="texto-relato" rows="5" placeholder="Sinta-se à vontade para escrever o que aconteceu..." class="w-full rounded-2xl bg-white border border-sos-roxo/20 p-4 text-sm text-sos-escuro focus:outline-none focus:border-sos-roxo focus:ring-2 focus:ring-sos-roxo/20 mb-4"></textarea>
+
+            <div id="feedback-relato" class="hidden mb-4 p-3.5 rounded-xl bg-sos-roxo/10 text-sos-roxo text-xs font-medium">
+                Seu registro foi salvo com segurança apenas neste dispositivo. Você não está sozinha.
+            </div>
+
+            <div class="flex items-center justify-between gap-3">
+                <button onclick="quickExit()" class="text-xs font-semibold text-sos-laranja hover:underline cursor-pointer">
+                    Sair rápido agora
+                </button>
+                <button onclick="salvarRelato()" class="px-6 py-3 rounded-full bg-sos-roxo text-white text-sm font-semibold hover:bg-sos-roxo-medio transition-all cursor-pointer">
+                    Guardar meu relato
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/script.js"></script>
+</body>
+</html>

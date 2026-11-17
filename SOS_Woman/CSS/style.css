@@ -1,0 +1,199 @@
+/* ==========================================================================
+   ESTILOS DO SOS WOMAN
+   Ordem do arquivo:
+   0. Paleta de cores (o ÚNICO lugar onde a cor existe)
+   1. Base do site
+   2. Animação de entrada
+   3. Auras (manchas de cor do fundo)
+   4. Ondas do mar
+   5. Cards com efeito 3D
+   6. Acessibilidade
+   ========================================================================== */
+
+/* ---------- 0. PALETA (TOKENS DE COR) ----------
+   Cada cor é guardada em CANAIS RGB ("R G B"), não em hexadecimal.
+   Motivo: assim o Tailwind consegue aplicar transparência, por exemplo
+   bg-sos-uva/20  ->  rgb(120 63 112 / 0.2).
+
+   O comentário à direita mostra o hexadecimal original do Figma,
+   para você achar a cor rapidinho.
+   ------------------------------------------------------------------ */
+:root {
+    /* Cores principais da marca */
+    --sos-amarelo: 246 189 96;   /* #F6BD60 */
+    --sos-laranja: 253 129 57;   /* #FD8139 */
+    --sos-azul: 148 176 218;     /* #94B0DA */
+    --sos-rosa: 246 148 193;     /* #F694C1 */
+    --sos-roxo: 179 76 156;      /* #B34C9C */
+
+    /* Roxo escuro: é a cor de texto/links/botões principal do Figma */
+    --sos-uva: 120 63 112;       /* #783F70 */
+    --sos-uva-escuro: 99 50 92;  /* #63325C (usado no hover) */
+    --sos-roxo-medio: 153 61 132;/* #993D84 (hover do modal) */
+
+    /* Neutros */
+    --sos-creme: 255 249 241;       /* #FFF9F1 - fundo do site */
+    --sos-branco-quente: 255 253 252;/* #FFFDFC - cartões claros */
+    --sos-escuro: 56 40 60;         /* #38283C - títulos */
+    --sos-texto: 113 101 116;       /* #716574 - parágrafos */
+    --sos-borda: 197 173 190;       /* #C5ADBE */
+    --sos-divisor: 223 212 221;     /* #DFD4DD */
+    --sos-input-borda: 221 209 220; /* #DDD1DC */
+
+    /* Fundos suaves das seções */
+    --sos-faixa: 242 234 239;       /* #F2EAEF - faixa de pilares */
+    --sos-chip: 244 232 236;        /* #F4E8EC - selo "acolhimento" */
+    --sos-card-rosa: 244 226 236;   /* #F4E2EC - card 01 */
+    --sos-card-azul: 227 234 244;   /* #E3EAF4 - card 02 */
+    --sos-card-amarelo: 250 232 203;/* #FAE8CB - card 03 */
+    --sos-lilas: 238 231 240;       /* #EEE7F0 - banner privacidade */
+    --sos-lilas-forte: 222 215 235; /* #DED7EB - forma interna */
+    --sos-azul-claro: 233 237 245;  /* #E9EDF5 - lista da rede de apoio */
+    --sos-azul-banner: 225 232 241; /* #E1E8F1 - banner saída rápida */
+    --sos-pessego: 249 233 220;     /* #F9E9DC - chamada final */
+    --sos-modal: 250 247 245;       /* #FAF7F5 - fundo do modal */
+
+    /* Rodapé (fundo escuro) */
+    --sos-divisor-escuro: 99 80 103;/* #635067 */
+    --sos-footer-texto: 227 214 227;/* #E3D6E3 */
+    --sos-footer-fraco: 216 202 217;/* #D8CAD9 */
+}
+
+/* ---------- 1. BASE ---------- */
+body {
+    background-color: rgb(var(--sos-creme));
+    color: rgb(var(--sos-texto));
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ---------- 2. ANIMAÇÃO DE ENTRADA (sobe e ganha cor) ---------- */
+.reveal-up {
+    opacity: 0.5;
+    filter: saturate(50%);
+    transform: translateY(34px);
+    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, filter, transform;
+}
+.reveal-up.is-visible {
+    opacity: 1;
+    filter: saturate(100%);
+    transform: translateY(0);
+}
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+
+/* ---------- 3. AURAS (manchas de cor que flutuam) ----------
+   Como funciona: cada div .aura-blob recebe duas classes extras:
+     - a COR    (aura-rosa, aura-amarelo, aura-azul, aura-laranja, aura-roxo)
+     - a FORÇA  (aura-leve, aura-suave, aura-media, aura-forte)
+
+   Essas classes só trocam as variáveis --aura e --aura-alpha,
+   e o gradiente abaixo usa essas variáveis. Por isso não precisamos
+   mais escrever gradiente em style="" no HTML.
+   ------------------------------------------------------------ */
+@keyframes auraA {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(85px, -60px) scale(1.08); }
+    66%      { transform: translate(-50px, 55px) scale(0.96); }
+}
+@keyframes auraB {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-95px, 65px) scale(1.1); }
+}
+@keyframes auraC {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40%      { transform: translate(70px, 75px) scale(1.06); }
+    75%      { transform: translate(-65px, -45px) scale(0.95); }
+}
+
+.aura-blob {
+    --aura: var(--sos-rosa);
+    --aura-alpha: 0.25;
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(50% 50% at 50% 50%,
+                rgb(var(--aura) / var(--aura-alpha)) 0%,
+                rgb(var(--aura) / 0) 100%);
+    animation: auraA 20s ease-in-out infinite;
+    will-change: transform;
+}
+.aura-delay-1 { animation-name: auraB; animation-duration: 15s; animation-delay: -6s; }
+.aura-delay-2 { animation-name: auraC; animation-duration: 18s; animation-delay: -12s; }
+
+/* Cor da aura */
+.aura-rosa    { --aura: var(--sos-rosa); }
+.aura-amarelo { --aura: var(--sos-amarelo); }
+.aura-azul    { --aura: var(--sos-azul); }
+.aura-laranja { --aura: var(--sos-laranja); }
+.aura-roxo    { --aura: var(--sos-roxo); }
+
+/* Intensidade da aura (quanto de opacidade no centro) */
+.aura-leve  { --aura-alpha: 0.15; }
+.aura-suave { --aura-alpha: 0.25; }
+.aura-media { --aura-alpha: 0.4; }
+.aura-forte { --aura-alpha: 0.6; }
+
+/* ---------- 4. ONDAS DO MAR (linhas do fundo) ----------
+   Cada linha tem dois movimentos:
+   - desliza para o lado (onda-X)
+   - sobe e desce de leve (onda-Y) */
+@keyframes ondaX {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--anda)); }
+}
+@keyframes ondaY {
+    from { transform: translateY(-14px); }
+    to   { transform: translateY(14px); }
+}
+
+.onda {
+    animation-name: ondaX;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+}
+.onda-vai-e-vem {
+    animation-name: ondaY;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    will-change: transform;
+}
+
+/* Ondas com deslocamento mais rápido e balanço vertical mais evidente */
+.onda-1 { --anda: 720px; animation-duration: 16s; }
+.onda-vai-e-vem-1 { animation-duration: 7s; animation-delay: -2s; }
+
+.onda-2 { --anda: -960px; animation-duration: 15s; }
+.onda-vai-e-vem-2 { animation-duration: 6s; animation-delay: -4s; }
+
+.onda-3 { --anda: 840px; animation-duration: 15s; }
+.onda-vai-e-vem-3 { animation-duration: 6s; animation-delay: -6s; }
+
+.onda-4 { --anda: -600px; animation-duration: 16s; }
+.onda-vai-e-vem-4 { animation-duration: 7s; animation-delay: -8s; }
+
+/* ---------- 5. CARDS COM EFEITO 3D ---------- */
+.card-3d-wrapper {
+    perspective: 1100px;
+}
+.card-3d {
+    transition: transform 0.25s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+}
+.card-3d:hover {
+    box-shadow: 0 22px 44px -15px rgb(var(--sos-escuro) / 0.14);
+}
+
+/* ---------- 6. ACESSIBILIDADE ----------
+   Quem pediu "reduzir movimento" no celular/computador não vê as animações. */
+@media (prefers-reduced-motion: reduce) {
+    .aura-blob, .onda, .onda-vai-e-vem { animation: none; }
+    .reveal-up { transition: none; opacity: 1; filter: none; transform: none; }
+}
